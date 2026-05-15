@@ -1,5 +1,57 @@
 # Scenario Progress — notification package
-Updated: 2026-05-15 | Batch: 2 functions per iteration | Tests: 761 (commit pending)
+Updated: 2026-05-16 | Tests: 897 passing | LCOV gcov build run
+
+## ▶ Coverage gap audit (2026-05-16, post-LCOV strip)
+
+EXPORT_API 함수에 붙어있던 LCOV_EXCL_START/STOP 마커를 모두 제거한 뒤
+`gbs build --define "gcov 1"` 로 측정. notification.out 결과 기준 미커버 분기 도출.
+
+### Per-file line coverage (낮은 순)
+
+| 파일 | Line Cov | EXPORT_API 미커버 함수 | 미커버 라인 | 상태 |
+|---|---:|---:|---:|---|
+| notification_internal_tidl.c | 0.4% | 8 | 912 | `[GAP]` marshal 계층 — rpc_port proxy round-trip 필요 |
+| notification_ongoing.c | 40.0% | 0 | 0 | `[INT]` EXPORT_API 없음; 내부 분기만 |
+| notification_status.c | 56.4% | 3 | 24 | `[GAP]` monitor cb set/unset + post |
+| notification_setting.c | 62.7% | 8 | 88 | `[GAP]` setting array fetch, app/pkg disabled |
+| notification_setting_service.c | 68.8% | 8 | 83 | `[GAP]` dnd schedule, dnd_allow_exception |
+| notification_noti.c | 70.9% | 24 | 317 | `[GAP]` DB step/finalize error, uid mismatch |
+| notification_internal.c | 71.7% | 24 | 228 | `[GAP]` event handler, channel, deferred task |
+| notification.c | 78.7% | 17 | 175 | `[GAP]` translation 분기 (notification_get_text 93 lines) |
+| notification_list.c | 82.2% | 5 | 29 | `[GAP]` insert/remove edge cases |
+| notification_db.c | 85.0% | 3 | 9 | `[GAP]` column setter error 분기 |
+| notification_ipc.c | 91.8% | 1 | 4 | `[GAP]` socket close error |
+| notification_error.c | 100% | 0 | 0 | `[D]` 완료 |
+| **합계** | | **102** | **1,976** | |
+
+### Top 5 가장 큰 미커버 EXPORT_API (라인 수 기준)
+
+| # | 함수 | 파일 | 미커버 라인 |
+|---|---|---|---:|
+| 1 | `make_noti_from_notification` | notification_internal_tidl.c | 355 |
+| 2 | `make_notification_from_noti` | notification_internal_tidl.c | 207 |
+| 3 | `make_empty_notification` | notification_internal_tidl.c | 190 |
+| 4 | `notification_get_text` | notification.c | 93 |
+| 5 | `make_noti_system_setting_from_setting` | notification_internal_tidl.c | 53 |
+
+### 추가된 시나리오 위치
+
+`notification_test_scenario.md` 의 **Appendix: Coverage Gap Analysis (post-LCOV, 2026-05-16)**
+섹션 (3974~5177 line) 에 102개 EXPORT_API 의 미커버 분기를 모두 분류해 추가.
+각 함수마다 `[N1]`, `[N2]`, ... 식으로 미커버 분기를 라인 범위와 함께 명시.
+
+### 우선순위 추천
+
+1. **notification_internal_tidl.c marshal 계층** (912 line, 4 함수) — 단일 proxy round-trip 테스트 한 개로 ~752 line 회수 가능
+2. **notification_noti.c DB 분기** (317 line, 24 함수) — sqlite mock 으로 step/finalize 에러 경로 추가
+3. **notification.c::notification_get_text** (93 line) — dgettext / count substitution 분기
+4. **notification_setting.c + notification_setting_service.c** (171 line, 16 함수) — DB-backed setting 경로
+
+---
+
+## (Legacy) Original progress table
+
+
 
 ## Status legend
 - `[D]` DONE — positive + null/error paths covered

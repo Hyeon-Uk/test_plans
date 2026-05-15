@@ -3971,3 +3971,1207 @@ mock 대상 (notification 패키지 외부 dep):
 - tizen_core
 
 test fixture 패턴: `TestFixture + ModuleMock + mock_hook` (Tizen AppFW 표준).
+
+---
+
+# Appendix: Coverage Gap Analysis (post-LCOV, 2026-05-16)
+
+> 생성 출처: `gbs build -A x86_64 --include-all --clean --define "gcov 1"` 후
+> `notification.out/src/notification/src/*.gcov.html` 분석.
+> EXPORT_API 함수에서 `tlaUNC`(uncovered) 클래스로 표시된 라인만 추출.
+
+## File-level coverage summary
+
+| 파일 | Line Cov | EXPORT_API 미커버 함수 | 미커버 라인 |
+|---|---:|---:|---:|
+| notification.c | 78.7% | 17 | 175 |
+| notification_db.c | 85.0% | 3 | 9 |
+| notification_error.c | 100% | 0 | 0 |
+| notification_internal.c | 71.7% | 24 | 228 |
+| notification_internal_tidl.c | 0.4% | 8 | 912 |
+| notification_ipc.c | 91.8% | 1 | 4 |
+| notification_list.c | 82.2% | 5 | 29 |
+| notification_noti.c | 70.9% | 24 | 317 |
+| notification_ongoing.c | 40.0% | 0 | 0 |
+| notification_setting.c | 62.7% | 8 | 88 |
+| notification_setting_service.c | 68.8% | 8 | 83 |
+| notification_status.c | 56.4% | 3 | 24 |
+| notification_viewer.c | — | 1 | 7 |
+| **합계** | | **102** | **1,976** |
+
+
+_Generated from LCOV gcov.html (tlaUNC class = uncovered)._
+
+
+## notification.c
+
+
+### notification_set_image  (notification.c:96)  — body L99-154, 12 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: priv_b = noti->b_priv_image_path; — L135 (`priv_b = noti->b_priv_image_path;`)
+- [N2] code: ret_val = NULL; — L137-140 (`ret_val = NULL;`)
+- [N3] NULL guard — L142-143 (`if (priv_path != NULL)`)
+- [N4] code: priv_b = bundle_create(); — L145-147 (`priv_b = bundle_create();`)
+- [N5] if condition (not taken) — L150-151 (`if (priv_path)`)
+
+### notification_get_image  (notification.c:156)  — body L159-194, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: *image_path = noti->app_icon_path; — L188 (`*image_path = noti->app_icon_path;`)
+
+### notification_set_text  (notification.c:230)  — body L233-441, 6 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: bundle_del(b, buf_key); — L299 (`bundle_del(b, buf_key);`)
+- [N2] code: bundle_del(b, buf_key); — L344 (`bundle_del(b, buf_key);`)
+- [N3] code: bundle_del(b, buf_key); — L359 (`bundle_del(b, buf_key);`)
+- [N4] code: bundle_del(b, buf_key); — L375 (`bundle_del(b, buf_key);`)
+- [N5] code: bundle_del(b, buf_key); — L391 (`bundle_del(b, buf_key);`)
+- [N6] code: bundle_del(b, buf_key); — L408 (`bundle_del(b, buf_key);`)
+
+### notification_get_text  (notification.c:443)  — body L446-791, 93 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: b = noti->b_key; — L471 (`b = noti->b_key;`)
+- [N2] code: snprintf(buf_key, sizeof(buf_key), "%d", type); — L476-477 (`snprintf(buf_key, sizeof(buf_key), "%d", type);`)
+- [N3] if condition (not taken) — L479-481 (`if (noti->is_translation == false) {`)
+- [N4] code: bindtextdomain(noti->domain, noti->dir); — L483 (`bindtextdomain(noti->domain, noti->dir);`)
+- [N5] code: get_str = dgettext(noti->domain, ret_val); — L485-488 (`get_str = dgettext(noti->domain, ret_val);`)
+- [N6] code: get_str = dgettext("sys_string", ret_val); — L490-492 (`get_str = dgettext("sys_string", ret_val);`)
+- [N7] code: get_str = NULL; — L494 (`get_str = NULL;`)
+- [N8] code: get_str = ret_val; /* fallback for printing anything */ — L506 (`get_str = ret_val; /* fallback for printing anything */`)
+- [N9] code: snprintf(buf_key, sizeof(buf_key), "%dvalue%d", — L539 (`snprintf(buf_key, sizeof(buf_key), "%dvalue%d",`)
+- [N10] code: bundle_get_str(b, buf_key, &ret_val); — L542-544 (`bundle_get_str(b, buf_key, &ret_val);`)
+- [N11] if condition (not taken) — L546-548 (`if (ret_variable_int == NOTIFICATION_COUNT_POS_LEFT) {`)
+- [N12] code: snprintf(buf_str, sizeof(buf_str), "%d ", ret_variable_int); — L552-553 (`snprintf(buf_str, sizeof(buf_str), "%d ", ret_variable_int);`)
+- [N13] code: num_args++; — L555 (`num_args++;`)
+- [N14] warning log path — L565 (`WARN("The buffer is full");`)
+- [N15] if condition (not taken) — L570-571 (`if (NOTI_TEXT_RESULT_LEN - 1 > strlen(result_str)) {`)
+- [N16] warning log path — L573 (`WARN("The buffer is full");`)
+- [N17] code: notification_get_count(noti->type, — L590-591 (`notification_get_count(noti->type,`)
+- [N18] NULL guard — L624 (`} else if (ret_val != NULL) {`)
+- [N19] code: translated_str = — L626-628 (`translated_str =`)
+- [N20] if condition (not taken) — L653 (`if (*(temp_str + 3) == 'd') {`)
+- [N21] code: ret_variable_int = 0; — L655 (`ret_variable_int = 0;`)
+- [N22] code: snprintf(buf_key, sizeof(buf_key), — L657 (`snprintf(buf_key, sizeof(buf_key),`)
+- [N23] code: num_args + *(temp_str + 1) - 49); — L659 (`num_args + *(temp_str + 1) - 49);`)
+- [N24] code: bundle_get_str(b, buf_key, &ret_val); — L661-663 (`bundle_get_str(b, buf_key, &ret_val);`)
+- [N25] if condition (not taken) — L665 (`if (ret_var_type ==`)
+- [N26] code: notification_get_count(noti->type, — L668-669 (`notification_get_count(noti->type,`)
+- [N27] code: snprintf(buf_key, sizeof(buf_key), — L675 (`snprintf(buf_key, sizeof(buf_key),`)
+- [N28] code: num_args + *(temp_str + 1) - 49); — L677 (`num_args + *(temp_str + 1) - 49);`)
+- [N29] code: bundle_get_str(b, buf_key, &ret_val); — L679-681 (`bundle_get_str(b, buf_key, &ret_val);`)
+- [N30] code: snprintf(buf_str, sizeof(buf_str), "%d", ret_variable_int); — L684-685 (`snprintf(buf_str, sizeof(buf_str), "%d", ret_variable_int);`)
+- [N31] code: temp_str += 3; — L687-688 (`temp_str += 3;`)
+- [N32] code: snprintf(buf_key, sizeof(buf_key), — L690 (`snprintf(buf_key, sizeof(buf_key),`)
+- [N33] code: num_args + *(temp_str + 1) - 49); — L692 (`num_args + *(temp_str + 1) - 49);`)
+- [N34] code: bundle_get_str(b, buf_key, &ret_val); — L694-696 (`bundle_get_str(b, buf_key, &ret_val);`)
+- [N35] code: temp_str += 3; — L698-699 (`temp_str += 3;`)
+- [N36] code: snprintf(buf_key, sizeof(buf_key), — L701 (`snprintf(buf_key, sizeof(buf_key),`)
+- [N37] code: num_args + *(temp_str + 1) - 49); — L703 (`num_args + *(temp_str + 1) - 49);`)
+- [N38] code: bundle_get_str(b, buf_key, &ret_val); — L705-707 (`bundle_get_str(b, buf_key, &ret_val);`)
+- [N39] code: snprintf(buf_str, sizeof(buf_str), "%.2f", ret_variable_double); — L709-710 (`snprintf(buf_str, sizeof(buf_str), "%.2f", ret_variable_double);`)
+- [N40] code: temp_str += 3; — L712 (`temp_str += 3;`)
+- [N41] if condition (not taken) — L714-715 (`if (NOTI_TEXT_RESULT_LEN - 1 > strlen(result_str)) {`)
+- [N42] warning log path — L717 (`WARN("The buffer is full");`)
+- [N43] if condition (not taken) — L722-723 (`if (NOTI_TEXT_RESULT_LEN - 1 > strlen(result_str)) {`)
+- [N44] warning log path — L725 (`WARN("The buffer is full");`)
+- [N45] code: snprintf(buf_key, sizeof(buf_key), "%dtype%d", — L734 (`snprintf(buf_key, sizeof(buf_key), "%dtype%d",`)
+- [N46] code: bundle_get_str(b, buf_key, &ret_val); — L737-739 (`bundle_get_str(b, buf_key, &ret_val);`)
+- [N47] if condition (not taken) — L741 (`if (ret_var_type == NOTIFICATION_VARIABLE_TYPE_COUNT) {`)
+- [N48] code: snprintf(buf_key, sizeof(buf_key), "%dvalue%d", — L743 (`snprintf(buf_key, sizeof(buf_key), "%dvalue%d",`)
+- [N49] code: bundle_get_str(b, buf_key, &ret_val); — L746-748 (`bundle_get_str(b, buf_key, &ret_val);`)
+- [N50] if condition (not taken) — L750-752 (`if (ret_variable_int == NOTIFICATION_COUNT_POS_RIGHT) {`)
+- [N51] code: snprintf(buf_str, sizeof(buf_str), " %d", ret_variable_int); — L756-757 (`snprintf(buf_str, sizeof(buf_str), " %d", ret_variable_int);`)
+- [N52] code: num_args++; — L759 (`num_args++;`)
+- [N53] cleanup/free path — L768 (`free(noti->temp_title);`)
+- [N54] cleanup/free path — L780 (`free(noti->temp_content);`)
+
+### notification_set_sound  (notification.c:883)  — body L886-930, 5 uncovered line(s)
+**Uncovered branches:**
+- [N1] cleanup/free path — L905-906 (`free(noti->priv_sound_path);`)
+- [N2] code: noti->priv_sound_path = priv_path; — L911 (`noti->priv_sound_path = priv_path;`)
+- [N3] cleanup/free path — L919-920 (`free(noti->priv_sound_path);`)
+
+### notification_set_vibration  (notification.c:949)  — body L952-996, 9 uncovered line(s)
+**Uncovered branches:**
+- [N1] cleanup/free path — L967-968 (`free(noti->vibration_path);`)
+- [N2] cleanup/free path — L973-974 (`free(noti->priv_vibration_path);`)
+- [N3] code: noti->priv_vibration_path = priv_path; — L978 (`noti->priv_vibration_path = priv_path;`)
+- [N4] cleanup/free path — L981-982 (`free(noti->vibration_path);`)
+- [N5] cleanup/free path — L985-986 (`free(noti->priv_vibration_path);`)
+
+### notification_set_launch_option  (notification.c:1077)  — body L1079-1104, 3 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L1092-1094 (`ERR("Failed to convert appcontrol to bundle[%d]", ret);`)
+
+### notification_get_launch_option  (notification.c:1106)  — body L1108-1145, 7 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: app_control_destroy(app_control_new); — L1131-1133 (`app_control_destroy(app_control_new);`)
+- [N2] error log path — L1136-1137 (`ERR("Failed to create app control[%d]", ret);`)
+- [N3] error log path — L1140-1141 (`ERR("Failed to get execute option[%d]", ret);`)
+
+### notification_set_event_handler  (notification.c:1147)  — body L1148-1178, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] cleanup/free path — L1172 (`bundle_free(noti->b_event_handler[event_type]);`)
+
+### notification_get_event_handler  (notification.c:1180)  — body L1181-1229, 11 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L1194-1196 (`ERR("Invalid event type");`)
+- [N2] error log path — L1208-1210 (`ERR("Failed to create app_control[%d]", err);`)
+- [N3] code: app_control_destroy(app_control_new); — L1217-1221 (`app_control_destroy(app_control_new);`)
+
+### notification_set_display_applist  (notification.c:1253)  — body L1255-1265, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: applist = NOTIFICATION_DISPLAY_APP_ALL; — L1260 (`applist = NOTIFICATION_DISPLAY_APP_ALL;`)
+
+### notification_get_pkgname  (notification.c:1322)  — body L1324-1334, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: *pkgname = NULL; — L1331 (`*pkgname = NULL;`)
+
+### notification_update  (notification.c:1374)  — body L1375-1377, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] uid mismatch path — L1376 (`return notification_update_for_uid(noti, aul_getuid());`)
+
+### notification_clone  (notification.c:1627)  — body L1628-1758, 12 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L1639-1640 (`ERR("Failed to alloc memory");`)
+- [N2] memory allocation path — L1656 (`new_noti->launch_app_id = strdup(noti->launch_app_id);`)
+- [N3] code: new_noti->args = bundle_dup(noti->args); — L1659 (`new_noti->args = bundle_dup(noti->args);`)
+- [N4] code: new_noti->group_args = bundle_dup(noti->group_args); — L1662 (`new_noti->group_args = bundle_dup(noti->group_args);`)
+- [N5] code: new_noti->b_service_responding = bundle_dup(noti->b_service_responding); — L1668 (`new_noti->b_service_responding = bundle_dup(noti->b_service_responding);`)
+- [N6] code: new_noti->b_service_multi_launch = bundle_dup(noti->b_service_multi_launch); — L1674 (`new_noti->b_service_multi_launch = bundle_dup(noti->b_service_multi_launch);`)
+- [N7] code: new_noti->b_event_handler[i] = bundle_dup(noti->b_event_handler[i]); — L1678 (`new_noti->b_event_handler[i] = bundle_dup(noti->b_event_handler[i]);`)
+- [N8] code: new_noti->b_key = bundle_dup(noti->b_key); — L1691 (`new_noti->b_key = bundle_dup(noti->b_key);`)
+- [N9] code: new_noti->b_priv_image_path = bundle_dup(noti->b_priv_image_path); — L1702 (`new_noti->b_priv_image_path = bundle_dup(noti->b_priv_image_path);`)
+- [N10] memory allocation path — L1710 (`new_noti->priv_sound_path = strdup(noti->priv_sound_path);`)
+- [N11] memory allocation path — L1718 (`new_noti->priv_vibration_path = strdup(noti->priv_vibration_path);`)
+
+### notification_free  (notification.c:1760)  — body L1761-1857, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] cleanup/free path — L1805 (`bundle_free(noti->b_priv_image_path);`)
+- [N2] cleanup/free path — L1811 (`free(noti->priv_sound_path);`)
+- [N3] cleanup/free path — L1817 (`free(noti->priv_vibration_path);`)
+- [N4] cleanup/free path — L1835 (`free(noti->app_icon_path);`)
+
+### notification_create_from_template  (notification.c:1966)  — body L1967-1988, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: return noti; — L1987 (`return noti;`)
+
+### notification_get_noti_block_state  (notification.c:1990)  — body L1991-2022, 7 uncovered line(s)
+**Uncovered branches:**
+- [N1] if condition (not taken) — L2010-2013 (`if (allow_to_notify) {`)
+- [N2] code: *state = NOTIFICATION_BLOCK_STATE_BLOCKED; — L2015 (`*state = NOTIFICATION_BLOCK_STATE_BLOCKED;`)
+- [N3] if condition (not taken) — L2018-2019 (`if (app_id)`)
+
+## notification_internal.c
+
+
+### notification_add_deferred_task  (notification_internal.c:299)  — body L301-310, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: _set_CPU_inheritance(); — L306-309 (`_set_CPU_inheritance();`)
+
+### notification_del_deferred_task  (notification_internal.c:312)  — body L314-323, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: _set_CPU_inheritance(); — L319-322 (`_set_CPU_inheritance();`)
+
+### notification_resister_changed_cb_for_uid  (notification_internal.c:325)  — body L327-366, 22 uncovered line(s)
+**Uncovered branches:**
+- [N1] NULL guard — L334-335 (`if (_noti_cb_hash == NULL)`)
+- [N2] memory allocation path — L337-340 (`noti_cb_info_new = (notification_cb_info_s *)malloc(sizeof(notification_cb_info_s));`)
+- [N3] code: noti_cb_info_new->cb_type = NOTIFICATION_CB_NORMAL; — L343-346 (`noti_cb_info_new->cb_type = NOTIFICATION_CB_NORMAL;`)
+- [N4] code: noti_cb_list = g_hash_table_lookup(_noti_cb_hash, GUINT_TO_POINTER(uid)); — L348 (`noti_cb_list = g_hash_table_lookup(_noti_cb_hash, GUINT_TO_POINTER(uid));`)
+- [N5] NULL guard — L350-352 (`if (noti_cb_list == NULL) {`)
+- [N6] code: noti_cb_list = g_list_append(noti_cb_list, noti_cb_info_new); — L354 (`noti_cb_list = g_list_append(noti_cb_list, noti_cb_info_new);`)
+- [N7] code: _set_CPU_inheritance(); — L357-361 (`_set_CPU_inheritance();`)
+- [N8] code: _clear_CPU_inheritance(); — L363 (`_clear_CPU_inheritance();`)
+- [N9] success return — L365 (`return NOTIFICATION_ERROR_NONE;`)
+
+### notification_translate_localized_text  (notification_internal.c:571)  — body L572-613, 2 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: noti->b_text = bundle_create(); — L587-588 (`noti->b_text = bundle_create();`)
+
+### notification_delete_group_by_group_id  (notification_internal.c:765)  — body L768-785, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: caller_app_id = notification_get_app_id_by_pid(getpid()); — L773 (`caller_app_id = notification_get_app_id_by_pid(getpid());`)
+
+### notification_get_id  (notification_internal.c:1081)  — body L1083-1098, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: *group_id = NOTIFICATION_GROUP_ID_NONE; — L1089 (`*group_id = NOTIFICATION_GROUP_ID_NONE;`)
+
+### notification_get_execute_option  (notification_internal.c:1150)  — body L1154-1215, 6 uncovered line(s)
+**Uncovered branches:**
+- [N1] NULL guard — L1190-1191 (`&& noti->dir != NULL) {`)
+- [N2] code: get_str = dgettext(noti->domain, ret_val); — L1193 (`get_str = dgettext(noti->domain, ret_val);`)
+- [N3] code: *text = get_str; — L1195 (`*text = get_str;`)
+- [N4] code: get_str = dgettext("sys_string", ret_val); — L1197 (`get_str = dgettext("sys_string", ret_val);`)
+- [N5] code: *text = get_str; — L1199 (`*text = get_str;`)
+
+### notification_insert_for_uid  (notification_internal.c:1217)  — body L1219-1259, 16 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: noti->uid = uid; — L1231-1232 (`noti->uid = uid;`)
+- [N2] code: _set_CPU_inheritance(); — L1234-1237 (`_set_CPU_inheritance();`)
+- [N3] code: noti->priv_id = id; — L1240 (`noti->priv_id = id;`)
+- [N4] NULL guard — L1243-1244 (`if (priv_id != NULL)`)
+- [N5] code: ret = notification_get_event_flag(noti, &event_flag); — L1246-1247 (`ret = notification_get_event_flag(noti, &event_flag);`)
+- [N6] if condition (not taken) — L1250-1254 (`if (event_flag == true) {`)
+
+### notification_update_async_for_uid  (notification_internal.c:1267)  — body L1269-1284, 6 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: noti->uid = uid; — L1275 (`noti->uid = uid;`)
+- [N2] code: noti->insert_time = time(NULL); — L1277 (`noti->insert_time = time(NULL);`)
+- [N3] code: _set_CPU_inheritance(); — L1279-1281 (`_set_CPU_inheritance();`)
+- [N4] return propagated error — L1283 (`return ret;`)
+
+### notification_register_detailed_changed_cb_for_uid  (notification_internal.c:1292)  — body L1295-1334, 22 uncovered line(s)
+**Uncovered branches:**
+- [N1] NULL guard — L1302-1303 (`if (_noti_cb_hash == NULL)`)
+- [N2] memory allocation path — L1305-1308 (`noti_cb_info_new = (notification_cb_info_s *)malloc(sizeof(notification_cb_info_s));`)
+- [N3] code: noti_cb_info_new->cb_type = NOTIFICATION_CB_DETAILED; — L1311-1314 (`noti_cb_info_new->cb_type = NOTIFICATION_CB_DETAILED;`)
+- [N4] code: noti_cb_list = g_hash_table_lookup(_noti_cb_hash, GUINT_TO_POINTER(uid)); — L1316 (`noti_cb_list = g_hash_table_lookup(_noti_cb_hash, GUINT_TO_POINTER(uid));`)
+- [N5] NULL guard — L1318-1320 (`if (noti_cb_list == NULL) {`)
+- [N6] code: noti_cb_list = g_list_append(noti_cb_list, noti_cb_info_new); — L1322 (`noti_cb_list = g_list_append(noti_cb_list, noti_cb_info_new);`)
+- [N7] code: _set_CPU_inheritance(); — L1325-1329 (`_set_CPU_inheritance();`)
+- [N8] code: _clear_CPU_inheritance(); — L1331 (`_clear_CPU_inheritance();`)
+- [N9] success return — L1333 (`return NOTIFICATION_ERROR_NONE;`)
+
+### notification_post_for_uid  (notification_internal.c:1509)  — body L1510-1557, 12 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: noti->priv_id = id; — L1534-1535 (`noti->priv_id = id;`)
+- [N2] code: ret = notification_get_event_flag(noti, &event_flag); — L1537-1539 (`ret = notification_get_event_flag(noti, &event_flag);`)
+- [N3] if condition (not taken) — L1541-1546 (`if (event_flag == true) {`)
+- [N4] code: g_list_free_full(file_list, free); — L1554 (`g_list_free_full(file_list, free);`)
+
+### notification_load_by_tag_for_uid  (notification_internal.c:1618)  — body L1619-1648, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L1632-1634 (`ERR("Failed to get a package name");`)
+- [N2] code: return noti; — L1647 (`return noti;`)
+
+### notification_create_from_package_template  (notification_internal.c:1650)  — body L1651-1671, 8 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: _set_CPU_inheritance(); — L1661-1667 (`_set_CPU_inheritance();`)
+- [N2] code: return noti; — L1670 (`return noti;`)
+
+### notification_post_with_event_cb_for_uid  (notification_internal.c:1794)  — body L1796-1865, 41 uncovered line(s)
+**Uncovered branches:**
+- [N1] if condition (not taken) — L1806 (`if (noti->type <= NOTIFICATION_TYPE_NONE || noti->type > NOTIFICATION_TYPE_MAX)`)
+- [N2] code: noti->insert_time = time(NULL); — L1809-1811 (`noti->insert_time = time(NULL);`)
+- [N3] code: file_list = __copy_private_file(noti); — L1813-1820 (`file_list = __copy_private_file(noti);`)
+- [N4] code: noti->priv_id = priv_id; — L1823 (`noti->priv_id = priv_id;`)
+- [N5] warning log path — L1825 (`WARN("Posted notification id[%d]", priv_id);`)
+- [N6] code: _set_CPU_inheritance(); — L1827-1831 (`_set_CPU_inheritance();`)
+- [N7] code: __notification_mutex_lock(); — L1833 (`__notification_mutex_lock();`)
+- [N8] code: __noti_event_cb_list = g_list_first(__noti_event_cb_list); — L1835-1836 (`__noti_event_cb_list = g_list_first(__noti_event_cb_list);`)
+- [N9] if condition (not taken) — L1839-1843 (`if (find_list) {`)
+- [N10] memory allocation path — L1845-1849 (`info = (notification_event_cb_info_s *)malloc(sizeof(notification_event_cb_info_s));`)
+- [N11] code: info->priv_id = priv_id; — L1851-1855 (`info->priv_id = priv_id;`)
+- [N12] code: out: — L1858-1860 (`out:`)
+- [N13] code: __notification_mutex_unlock(); — L1862 (`__notification_mutex_unlock();`)
+
+### notification_set_extension_event_handler  (notification_internal.c:2036)  — body L2039-2097, 9 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L2071-2073 (`ERR("Failed to export app_control to bundle [%d]", err);`)
+- [N2] error log path — L2078-2080 (`ERR("Failed to encode bundle [%d]", err);`)
+- [N3] error log path — L2085-2087 (`ERR("Failed to add str to bundle [%d]", err);`)
+
+### notification_get_extension_event_handler  (notification_internal.c:2099)  — body L2102-2157, 11 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L2125-2126 (`ERR("No handler, Invalid event[%d]", event);`)
+- [N2] error log path — L2131-2132 (`ERR("Failed to create bundle");`)
+- [N3] error log path — L2137-2139 (`ERR("Failed to create app control [%d]", err);`)
+- [N4] error log path — L2144-2147 (`ERR("Failed to import app control from bundle [%d]", err);`)
+
+### notification_channel_create  (notification_internal.c:2556)  — body L2558-2582, 2 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L2569-2570 (`ERR("Out of memory");`)
+
+### notification_channel_add  (notification_internal.c:2604)  — body L2605-2630, 11 uncovered line(s)
+**Uncovered branches:**
+- [N1] NULL guard — L2612 (`|| noti_channel->channel_name == NULL) {`)
+- [N2] code: _set_CPU_inheritance(); — L2617-2624 (`_set_CPU_inheritance();`)
+- [N3] warning log path — L2627 (`WARN("notification_channel_add done");`)
+- [N4] return propagated error — L2629 (`return ret;`)
+
+### notification_channel_remove  (notification_internal.c:2632)  — body L2633-2657, 10 uncovered line(s)
+**Uncovered branches:**
+- [N1] NULL guard — L2640 (`|| noti_channel->channel_name == NULL) {`)
+- [N2] code: _set_CPU_inheritance(); — L2645-2651 (`_set_CPU_inheritance();`)
+- [N3] warning log path — L2654 (`WARN("notification_channel_remove done");`)
+- [N4] return propagated error — L2656 (`return ret;`)
+
+### notification_channel_update  (notification_internal.c:2659)  — body L2660-2685, 11 uncovered line(s)
+**Uncovered branches:**
+- [N1] NULL guard — L2667 (`|| noti_channel->channel_name == NULL) {`)
+- [N2] code: _set_CPU_inheritance(); — L2672-2679 (`_set_CPU_inheritance();`)
+- [N3] warning log path — L2682 (`WARN("notification_channel_update done");`)
+- [N4] success return — L2684 (`return NOTIFICATION_ERROR_NONE;`)
+
+### notification_channel_get_by_name  (notification_internal.c:2687)  — body L2689-2736, 17 uncovered line(s)
+**Uncovered branches:**
+- [N1] memory allocation path — L2705 (`noti_channel = (notification_channel_s *)calloc(1,`)
+- [N2] NULL guard — L2707-2710 (`if (noti_channel == NULL) {`)
+- [N3] code: _set_CPU_inheritance(); — L2713-2714 (`_set_CPU_inheritance();`)
+- [N4] code: _clear_CPU_inheritance(); — L2716-2720 (`_clear_CPU_inheritance();`)
+- [N5] memory allocation path — L2722-2725 (`noti_channel->app_id = strdup(app_id);`)
+- [N6] code: *channel = noti_channel; — L2727 (`*channel = noti_channel;`)
+
+### notification_channel_get_block  (notification_internal.c:2789)  — body L2791-2804, 2 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L2795-2796 (`ERR("Invalid parameter");`)
+
+### notification_channel_clone  (notification_internal.c:2823)  — body L2825-2851, 2 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L2838-2839 (`ERR("Out of memory");`)
+
+### notification_channel_foreach  (notification_internal.c:2853)  — body L2855-2891, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L2867-2869 (`ERR("failed to get app id");`)
+- [N2] code: out: — L2884 (`out:`)
+
+## notification_noti.c
+
+
+### notification_noti_insert  (notification_noti.c:1050)  — body L1051-1130, 9 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L1065-1066 (`ERR("[%s] is not allowed to notify", noti->caller_app_id);`)
+- [N2] code: noti->display_applist = (noti->display_applist & (~NOTIFICATION_DISPLAY_APP_ACTI — L1073-1074 (`noti->display_applist = (noti->display_applist & (~NOTIFICATION_DISPLAY_APP_ACTIVE));`)
+- [N3] code: return get_last_result(); — L1087 (`return get_last_result();`)
+- [N4] error log path — L1092-1094 (`ERR("sqlite3_mprintf Failed");`)
+- [N5] goto error/cleanup — L1107 (`goto err;`)
+
+### notification_noti_get_by_priv_id  (notification_noti.c:1132)  — body L1133-1155, 3 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1144-1145 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N2] if condition (not taken) — L1151 (`if (query_where)`)
+
+### notification_noti_get_by_tag  (notification_noti.c:1157)  — body L1158-1181, 3 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1170-1171 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N2] if condition (not taken) — L1177 (`if (query_where)`)
+
+### notification_noti_update  (notification_noti.c:1183)  — body L1184-1257, 8 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: DBG("[%s] is not allowed to notify", noti->caller_app_id); — L1196-1197 (`DBG("[%s] is not allowed to notify", noti->caller_app_id);`)
+- [N2] code: noti->display_applist = (noti->display_applist & (~NOTIFICATION_DISPLAY_APP_ACTI — L1204-1205 (`noti->display_applist = (noti->display_applist & (~NOTIFICATION_DISPLAY_APP_ACTIVE));`)
+- [N3] code: return get_last_result(); — L1211 (`return get_last_result();`)
+- [N4] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1224-1225 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N5] goto error/cleanup — L1238 (`goto err;`)
+
+### notification_noti_delete_all  (notification_noti.c:1259)  — body L1262-1378, 20 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: query_where = sqlite3_mprintf("WHERE uid = %d", uid); — L1279 (`query_where = sqlite3_mprintf("WHERE uid = %d", uid);`)
+- [N2] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1284-1285 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N3] code: query_where = sqlite3_mprintf("WHERE caller_app_id = %Q " — L1289 (`query_where = sqlite3_mprintf("WHERE caller_app_id = %Q "`)
+- [N4] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1297-1298 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N5] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1314-1315 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N6] error log path — L1320 (`ERR("Failed to sqlite3_prepare_V2 [%d][%s]",`)
+- [N7] code: ret = NOTIFICATION_ERROR_FROM_DB; — L1322-1323 (`ret = NOTIFICATION_ERROR_FROM_DB;`)
+- [N8] error log path — L1328-1330 (`ERR("Failed to alloc memory");`)
+- [N9] sqlite step/prepare path — L1334-1335 (`*(tmp + i) = sqlite3_column_int(stmt, 0);`)
+- [N10] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1345-1346 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N11] goto error/cleanup — L1351 (`goto err;`)
+- [N12] cleanup/free path — L1374 (`free(tmp);`)
+
+### notification_noti_delete_by_priv_id  (notification_noti.c:1380)  — body L1381-1410, 3 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1396-1397 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N2] if condition (not taken) — L1403 (`if (query)`)
+
+### notification_noti_delete_by_priv_id_get_changes  (notification_noti.c:1412)  — body L1416-1443, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: return get_last_result(); — L1423 (`return get_last_result();`)
+- [N2] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1429-1430 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N3] if condition (not taken) — L1436 (`if (query)`)
+
+### notification_noti_delete_by_display_applist  (notification_noti.c:1445)  — body L1449-1553, 17 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L1470-1472 (`ERR("sqlite3_mprintf Failed");`)
+- [N2] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1487-1488 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N3] error log path — L1493 (`ERR("Failed to sqlite3_prepare [%d][%s]", ret,`)
+- [N4] code: ret = NOTIFICATION_ERROR_FROM_DB; — L1495-1496 (`ret = NOTIFICATION_ERROR_FROM_DB;`)
+- [N5] error log path — L1502-1504 (`ERR("Failed to alloc memory");`)
+- [N6] error log path — L1522-1524 (`ERR("sqlite3_mprintf Failed");`)
+- [N7] goto error/cleanup — L1529 (`goto err;`)
+- [N8] code: err: — L1537 (`err:`)
+- [N9] code: __free_deleted_list(info, count); — L1549 (`__free_deleted_list(info, count);`)
+
+### notification_noti_get_count  (notification_noti.c:1556)  — body L1560-1689, 26 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1585-1586 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N2] code: query_where = sqlite3_mprintf("WHERE caller_app_id = %Q " — L1597 (`query_where = sqlite3_mprintf("WHERE caller_app_id = %Q "`)
+- [N3] if condition (not taken) — L1601-1602 (`if (priv_id == NOTIFICATION_PRIV_ID_NONE)`)
+- [N4] code: query_where = sqlite3_mprintf("WHERE caller_app_id = %Q " — L1606 (`query_where = sqlite3_mprintf("WHERE caller_app_id = %Q "`)
+- [N5] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1612-1613 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N6] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1620-1621 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N7] if condition (not taken) — L1625-1626 (`if (type != NOTIFICATION_TYPE_NONE)`)
+- [N8] code: query_where_more = sqlite3_mprintf("flag_simmode = 0 "); — L1629 (`query_where_more = sqlite3_mprintf("flag_simmode = 0 ");`)
+- [N9] NULL guard — L1631-1633 (`if (query_where_more == NULL) {`)
+- [N10] if condition (not taken) — L1637 (`if (query_where_more) {`)
+- [N11] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1641-1642 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N12] code: query = sqlite3_mprintf("%s %s", query_base, query_where); — L1645-1648 (`query = sqlite3_mprintf("%s %s", query_base, query_where);`)
+- [N13] error log path — L1654 (`ERR("Failed to sqlite3_prepare_v2[%d][%s]",`)
+- [N14] code: ret = NOTIFICATION_ERROR_FROM_DB; — L1657-1658 (`ret = NOTIFICATION_ERROR_FROM_DB;`)
+
+### notification_noti_get_all_count  (notification_noti.c:1691)  — body L1692-1750, 13 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L1700-1701 (`ERR("Invalid parameter - count is null");`)
+- [N2] code: ret = get_last_result(); — L1706-1708 (`ret = get_last_result();`)
+- [N3] code: sql_buf = sqlite3_mprintf("SELECT count(*) FROM %q WHERE uid = %d", — L1716 (`sql_buf = sqlite3_mprintf("SELECT count(*) FROM %q WHERE uid = %d",`)
+- [N4] code: ret = NOTIFICATION_ERROR_FROM_DB; — L1720-1722 (`ret = NOTIFICATION_ERROR_FROM_DB;`)
+- [N5] code: ret = NOTIFICATION_ERROR_FROM_DB; — L1727-1728 (`ret = NOTIFICATION_ERROR_FROM_DB;`)
+- [N6] goto error/cleanup — L1730 (`goto out;`)
+- [N7] code: *count = 0; — L1737 (`*count = 0;`)
+
+### notification_noti_get_grouping_list  (notification_noti.c:1752)  — body L1758-1828, 9 uncovered line(s)
+**Uncovered branches:**
+- [N1] if condition (not taken) — L1780-1781 (`if (type != NOTIFICATION_TYPE_NONE)`)
+- [N2] code: query_where = sqlite3_mprintf(" AND flag_simmode = 0 "); — L1784 (`query_where = sqlite3_mprintf(" AND flag_simmode = 0 ");`)
+- [N3] NULL guard — L1786 (`if (query_where == NULL)`)
+- [N4] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1793-1794 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N5] code: query = sqlite3_mprintf("noti_list WHERE 1 > 0 %s %s " — L1804 (`query = sqlite3_mprintf("noti_list WHERE 1 > 0 %s %s "`)
+- [N6] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1811-1812 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+
+### notification_noti_get_detail_list  (notification_noti.c:1830)  — body L1835-1904, 10 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: return get_last_result(); — L1852 (`return get_last_result();`)
+- [N2] if condition (not taken) — L1856-1857 (`if (status == VCONFKEY_TELEPHONY_SIM_INSERTED)`)
+- [N3] code: query_where = sqlite3_mprintf("WHERE  caller_app_id = %Q " — L1860 (`query_where = sqlite3_mprintf("WHERE  caller_app_id = %Q "`)
+- [N4] code: query_where = sqlite3_mprintf("WHERE  caller_app_id = %Q " — L1873 (`query_where = sqlite3_mprintf("WHERE  caller_app_id = %Q "`)
+- [N5] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1880-1881 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N6] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1887-1888 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N7] if condition (not taken) — L1894 (`if (query_where)`)
+
+### notification_noti_check_tag  (notification_noti.c:1906)  — body L1907-1967, 7 uncovered line(s)
+**Uncovered branches:**
+- [N1] warning log path — L1917-1918 (`WARN("@@ return not exist");`)
+- [N2] code: return get_last_result(); — L1924 (`return get_last_result();`)
+- [N3] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1931-1932 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N4] error log path — L1937 (`ERR("Failed to sqlite3_prepare_v2[%d][%s]",`)
+- [N5] goto error/cleanup — L1939 (`goto err;`)
+
+### notification_noti_check_count_for_template  (notification_noti.c:1969)  — body L1970-2019, 7 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: return get_last_result(); — L1982 (`return get_last_result();`)
+- [N2] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L1988-1989 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N3] error log path — L1994 (`ERR("Failed to sqlite3_prepare_v2[%d][%s]",`)
+- [N4] code: ret = NOTIFICATION_ERROR_FROM_DB; — L1996-1997 (`ret = NOTIFICATION_ERROR_FROM_DB;`)
+- [N5] sqlite step/prepare path — L2002 (`result = sqlite3_column_int(stmt, 0);`)
+
+### notification_noti_add_template  (notification_noti.c:2021)  — body L2022-2081, 10 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L2030-2031 (`ERR("NOTIFICATION_ERROR_INVALID_PARAMETER");`)
+- [N2] code: return get_last_result(); — L2040 (`return get_last_result();`)
+- [N3] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L2048-2049 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N4] error log path — L2054 (`ERR("Failed to sqlite3_prepare_v2[%d][%s]",`)
+- [N5] code: ret = NOTIFICATION_ERROR_FROM_DB; — L2056-2057 (`ret = NOTIFICATION_ERROR_FROM_DB;`)
+- [N6] goto error/cleanup — L2062 (`goto err;`)
+- [N7] code: ret = NOTIFICATION_ERROR_FROM_DB; — L2068 (`ret = NOTIFICATION_ERROR_FROM_DB;`)
+
+### notification_noti_get_package_template  (notification_noti.c:2083)  — body L2084-2106, 3 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L2089-2090 (`ERR("NOTIFICATION_ERROR_INVALID_PARAMETER");`)
+- [N2] error log path — L2100 (`ERR("Failed to get notification [%d]", ret);`)
+
+### notification_noti_delete_template  (notification_noti.c:2108)  — body L2109-2138, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: return get_last_result(); — L2119 (`return get_last_result();`)
+- [N2] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L2124-2125 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N3] if condition (not taken) — L2131 (`if (query)`)
+
+### notification_noti_init_data  (notification_noti.c:2140)  — body L2141-2166, 6 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L2148-2149 (`ERR("db open");`)
+- [N2] error log path — L2155-2157 (`ERR("OOM - sql query");`)
+- [N3] error log path — L2162 (`ERR("notification_db_exec");`)
+
+### notification_noti_check_limit  (notification_noti.c:2168)  — body L2169-2239, 12 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: return get_last_result(); — L2183 (`return get_last_result();`)
+- [N2] error log path — L2188-2190 (`ERR("sqlite3_mprintf Failed");`)
+- [N3] error log path — L2196-2197 (`ERR("Failed to get count to delete %d", ret);`)
+- [N4] error log path — L2208-2210 (`ERR("sqlite3_mprintf Failed");`)
+- [N5] error log path — L2215 (`ERR("sqlite3_prepare_v2 Failed [%d][%s]", ret,`)
+- [N6] code: ret = NOTIFICATION_ERROR_FROM_DB; — L2217-2218 (`ret = NOTIFICATION_ERROR_FROM_DB;`)
+
+### notification_noti_get_channel  (notification_noti.c:2242)  — body L2244-2305, 39 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: int ret; — L2245-2250 (`int ret;`)
+- [N2] warning log path — L2252 (`WARN("noti get channel");`)
+- [N3] NULL guard — L2254-2255 (`if (app_id == NULL || channel_name == NULL || is_blocked == NULL)`)
+- [N4] code: db = notification_db_open(); — L2257-2259 (`db = notification_db_open();`)
+- [N5] code: query = sqlite3_mprintf("SELECT blockable, is_blocked FROM %s " — L2261 (`query = sqlite3_mprintf("SELECT blockable, is_blocked FROM %s "`)
+- [N6] NULL guard — L2265-2267 (`if (query == NULL) {`)
+- [N7] sqlite step/prepare path — L2270-2272 (`ret = sqlite3_prepare_v2(db, query, strlen(query), &stmt, NULL);`)
+- [N8] goto error/cleanup — L2274 (`goto out;`)
+- [N9] sqlite step/prepare path — L2277-2280 (`ret = sqlite3_step(stmt);`)
+- [N10] sqlite return-code branch — L2283-2284 (`} else if (ret == SQLITE_DONE) {`)
+- [N11] error log path — L2287-2289 (`ERR("failed to get channel [%d][%s]", ret, sqlite3_errmsg(db));`)
+- [N12] code: *blockable = _blockable; — L2292-2300 (`*blockable = _blockable;`)
+- [N13] warning log path — L2302 (`WARN("noti get channel done : %d", ret);`)
+
+### notification_noti_insert_channel  (notification_noti.c:2307)  — body L2309-2346, 22 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: sqlite3 *db = NULL; — L2310-2312 (`sqlite3 *db = NULL;`)
+- [N2] warning log path — L2314 (`WARN("noti add channel");`)
+- [N3] NULL guard — L2316-2317 (`if (app_id == NULL || channel_name == NULL)`)
+- [N4] code: db = notification_db_open(); — L2319-2321 (`db = notification_db_open();`)
+- [N5] code: query = sqlite3_mprintf( — L2323 (`query = sqlite3_mprintf(`)
+- [N6] NULL guard — L2327-2329 (`if (query == NULL) {`)
+- [N7] code: ret = notification_db_exec(db, query, NULL); — L2332-2334 (`ret = notification_db_exec(db, query, NULL);`)
+- [N8] code: out: — L2336-2338 (`out:`)
+- [N9] if condition (not taken) — L2340-2341 (`if (db)`)
+- [N10] warning log path — L2343 (`WARN("noti add channel done : %d", ret);`)
+
+### notification_noti_delete_channel  (notification_noti.c:2348)  — body L2350-2386, 22 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: sqlite3 *db = NULL; — L2351-2353 (`sqlite3 *db = NULL;`)
+- [N2] warning log path — L2355 (`WARN("noti delete channel");`)
+- [N3] NULL guard — L2357-2358 (`if (app_id == NULL || channel_name == NULL)`)
+- [N4] code: db = notification_db_open(); — L2360-2362 (`db = notification_db_open();`)
+- [N5] code: query = sqlite3_mprintf( — L2364 (`query = sqlite3_mprintf(`)
+- [N6] NULL guard — L2367-2369 (`if (query == NULL) {`)
+- [N7] code: ret = notification_db_exec(db, query, NULL); — L2372-2374 (`ret = notification_db_exec(db, query, NULL);`)
+- [N8] code: out: — L2376-2378 (`out:`)
+- [N9] if condition (not taken) — L2380-2381 (`if (db)`)
+- [N10] warning log path — L2383 (`WARN("noti delete channel done : %d", ret);`)
+
+### notification_noti_update_channel  (notification_noti.c:2388)  — body L2390-2427, 22 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: sqlite3 *db = NULL; — L2391-2393 (`sqlite3 *db = NULL;`)
+- [N2] warning log path — L2395 (`WARN("noti update channel");`)
+- [N3] NULL guard — L2397-2398 (`if (app_id == NULL || channel_name == NULL)`)
+- [N4] code: db = notification_db_open(); — L2400-2402 (`db = notification_db_open();`)
+- [N5] code: query = sqlite3_mprintf("UPDATE %s SET blockable = %d, is_blocked = %d " — L2404 (`query = sqlite3_mprintf("UPDATE %s SET blockable = %d, is_blocked = %d "`)
+- [N6] NULL guard — L2408-2410 (`if (query == NULL) {`)
+- [N7] code: ret = notification_db_exec(db, query, NULL); — L2413-2415 (`ret = notification_db_exec(db, query, NULL);`)
+- [N8] code: out: — L2417-2419 (`out:`)
+- [N9] if condition (not taken) — L2421-2422 (`if (db)`)
+- [N10] warning log path — L2424 (`WARN("noti update channel done : %d", ret);`)
+
+### notification_noti_get_channel_list  (notification_noti.c:2429)  — body L2431-2488, 38 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: int ret; — L2432-2439 (`int ret;`)
+- [N2] warning log path — L2441 (`WARN("noti get channel list");`)
+- [N3] NULL guard — L2443-2444 (`if (app_id == NULL || channel_list == NULL)`)
+- [N4] code: db = notification_db_open(); — L2446-2448 (`db = notification_db_open();`)
+- [N5] code: query = sqlite3_mprintf("SELECT channel_name, blockable, is_blocked FROM %s " — L2450 (`query = sqlite3_mprintf("SELECT channel_name, blockable, is_blocked FROM %s "`)
+- [N6] NULL guard — L2452-2454 (`if (query == NULL) {`)
+- [N7] sqlite step/prepare path — L2457-2459 (`ret = sqlite3_prepare_v2(db, query, strlen(query), &stmt, NULL);`)
+- [N8] goto error/cleanup — L2461 (`goto out;`)
+- [N9] sqlite step/prepare path — L2464-2467 (`while (sqlite3_step(stmt) == SQLITE_ROW) {`)
+- [N10] code: notification_channel_create_with_info(app_id, channel_name, — L2469 (`notification_channel_create_with_info(app_id, channel_name,`)
+- [N11] if condition (not taken) — L2472-2474 (`if (channel)`)
+- [N12] code: out: — L2477-2483 (`out:`)
+- [N13] warning log path — L2485 (`WARN("noti get channel list done : %d", ret);`)
+
+## notification_setting.c
+
+
+### notification_setting_get_setting_array_for_uid  (notification_setting.c:53)  — body L54-61, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] rpc-port/TIDL path — L60 (`return notification_tidl_request_get_setting_array(setting_array, count, uid);`)
+
+### notification_setting_get_setting_by_appid_for_uid  (notification_setting.c:68)  — body L69-76, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] rpc-port/TIDL path — L75 (`return notification_tidl_request_get_setting_by_app_id(app_id, setting, uid);`)
+
+### notification_setting_get_setting  (notification_setting.c:83)  — body L84-97, 3 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: ret = notification_setting_get_setting_by_package_name(app_id, setting); — L92 (`ret = notification_setting_get_setting_by_package_name(app_id, setting);`)
+- [N2] cleanup/free path — L94 (`free(app_id);`)
+- [N3] return propagated error — L96 (`return ret;`)
+
+### notification_setting_update_setting_for_uid  (notification_setting.c:263)  — body L264-271, 1 uncovered line(s)
+**Uncovered branches:**
+- [N1] rpc-port/TIDL path — L270 (`return notification_tidl_update_setting(setting, uid);`)
+
+### notification_setting_refresh_setting_table  (notification_setting.c:511)  — body L512-558, 22 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: pkgmgr_ret = pkgmgrinfo_appinfo_filter_create(&filter); — L525-529 (`pkgmgr_ret = pkgmgrinfo_appinfo_filter_create(&filter);`)
+- [N2] code: pkgmgr_ret = pkgmgrinfo_appinfo_filter_add_string(filter, — L532 (`pkgmgr_ret = pkgmgrinfo_appinfo_filter_add_string(filter,`)
+- [N3] if condition (not taken) — L534-537 (`if (pkgmgr_ret != PMINFO_R_OK) {`)
+- [N4] code: info.db = db; — L540-542 (`info.db = db;`)
+- [N5] if condition (not taken) — L544-547 (`if (pkgmgr_ret != PMINFO_R_OK) {`)
+- [N6] code: out: — L550-552 (`out:`)
+- [N7] if condition (not taken) — L554-555 (`if (db)`)
+
+### notification_register_system_setting_dnd_changed_cb_for_uid  (notification_setting.c:897)  — body L898-939, 19 uncovered line(s)
+**Uncovered branches:**
+- [N1] rpc-port/TIDL path — L906-908 (`if (notification_tidl_monitor_init() != NOTIFICATION_ERROR_NONE) {`)
+- [N2] NULL guard — L911-912 (`if (_noti_dnd_cb_hash == NULL)`)
+- [N3] memory allocation path — L914-915 (`dnd_data = (noti_dnd_cb_info_s *)malloc(sizeof(noti_dnd_cb_info_s));`)
+- [N4] code: dnd_data->callback = callback; — L918-919 (`dnd_data->callback = callback;`)
+- [N5] code: noti_dnd_list = (GList *)g_hash_table_lookup(_noti_dnd_cb_hash, GUINT_TO_POINTER — L921 (`noti_dnd_list = (GList *)g_hash_table_lookup(_noti_dnd_cb_hash, GUINT_TO_POINTER(uid));`)
+- [N6] NULL guard — L923-925 (`if (noti_dnd_list == NULL) {`)
+- [N7] code: noti_dnd_found_list = g_list_find_custom(noti_dnd_list, (gconstpointer)callback, — L927 (`noti_dnd_found_list = g_list_find_custom(noti_dnd_list, (gconstpointer)callback,`)
+- [N8] if condition (not taken) — L929-932 (`if (noti_dnd_found_list) {`)
+- [N9] code: noti_dnd_list = g_list_append(noti_dnd_list, dnd_data); — L935 (`noti_dnd_list = g_list_append(noti_dnd_list, dnd_data);`)
+
+### notification_unregister_system_setting_dnd_changed_cb_for_uid  (notification_setting.c:946)  — body L947-985, 14 uncovered line(s)
+**Uncovered branches:**
+- [N1] NULL guard — L955 (`if (_noti_dnd_cb_hash == NULL)`)
+- [N2] code: noti_dnd_cb_list = (GList *)g_hash_table_lookup(_noti_dnd_cb_hash, GUINT_TO_POIN — L958 (`noti_dnd_cb_list = (GList *)g_hash_table_lookup(_noti_dnd_cb_hash, GUINT_TO_POINTER(uid));`)
+- [N3] NULL guard — L960 (`if (noti_dnd_cb_list == NULL)`)
+- [N4] code: noti_dnd_del_list = g_list_find_custom(noti_dnd_cb_list, (gconstpointer)callback — L963 (`noti_dnd_del_list = g_list_find_custom(noti_dnd_cb_list, (gconstpointer)callback,`)
+- [N5] if condition (not taken) — L966-969 (`if (noti_dnd_del_list) {`)
+- [N6] NULL guard — L974-975 (`if (noti_dnd_cb_list == NULL) {`)
+- [N7] code: noti_dnd_cb_list = g_list_first(noti_dnd_cb_list); — L977-978 (`noti_dnd_cb_list = g_list_first(noti_dnd_cb_list);`)
+- [N8] if condition (not taken) — L981-982 (`if (g_hash_table_size(_noti_dnd_cb_hash) == 0)`)
+
+### notification_system_setting_init_system_setting_table  (notification_setting.c:1039)  — body L1040-1100, 27 uncovered line(s)
+**Uncovered branches:**
+- [N1] uid mismatch path — L1052-1054 (`if (_is_uid_in_system_setting_table(db, uid) == true) {`)
+- [N2] code: query_system_setting = sqlite3_mprintf("INSERT INTO %s (uid) " — L1058 (`query_system_setting = sqlite3_mprintf("INSERT INTO %s (uid) "`)
+- [N3] NULL guard — L1062-1065 (`if (query_system_setting == NULL) {`)
+- [N4] code: ret = notification_db_exec(db, query_system_setting, NULL); — L1068-1070 (`ret = notification_db_exec(db, query_system_setting, NULL);`)
+- [N5] code: query_dnd_allow_exception = sqlite3_mprintf("INSERT INTO %s " — L1073 (`query_dnd_allow_exception = sqlite3_mprintf("INSERT INTO %s "`)
+- [N6] NULL guard — L1077-1080 (`if (query_dnd_allow_exception == NULL) {`)
+- [N7] code: ret = notification_db_exec(db, query_dnd_allow_exception, NULL); — L1083-1085 (`ret = notification_db_exec(db, query_dnd_allow_exception, NULL);`)
+- [N8] code: DBG("Initialization is success."); — L1087 (`DBG("Initialization is success.");`)
+- [N9] code: out: — L1089-1091 (`out:`)
+- [N10] if condition (not taken) — L1093-1094 (`if (query_dnd_allow_exception)`)
+- [N11] if condition (not taken) — L1096-1097 (`if (db)`)
+
+## notification_setting_service.c
+
+
+### notification_setting_db_update_do_not_disturb  (notification_setting_service.c:438)  — body L440-469, 3 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L454-456 (`ERR("Failed to alloc query");`)
+
+### notification_system_setting_get_dnd_schedule_enabled_uid  (notification_setting_service.c:471)  — body L473-534, 18 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L492-493 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N2] if condition (not taken) — L503-506 (`if (row_count == 0) {`)
+- [N3] memory allocation path — L509-513 (`result_uids = (uid_t *)malloc(sizeof(int) * row_count);`)
+- [N4] code: column_index = column_count; — L516-518 (`column_index = column_count;`)
+- [N5] code: *uids = result_uids; — L520-521 (`*uids = result_uids;`)
+- [N6] if condition (not taken) — L524 (`if (query)`)
+- [N7] code: sqlite3_free_table(query_result); — L528 (`sqlite3_free_table(query_result);`)
+
+### notification_get_dnd_and_allow_to_notify  (notification_setting_service.c:536)  — body L542-631, 13 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L567-569 (`ERR("Failed to alloc memory");`)
+- [N2] error log path — L576-578 (`ERR("Failed to alloc memory");`)
+- [N3] error log path — L589-591 (`ERR("Invalid uid [%d] or app id [%s]", uid, app_id);`)
+- [N4] code: col_index = col_count; — L611-612 (`col_index = col_count;`)
+- [N5] code: sqlite3_free_table(query_setting_result); — L616 (`sqlite3_free_table(query_setting_result);`)
+- [N6] code: sqlite3_free_table(query_system_setting_result); — L619 (`sqlite3_free_table(query_system_setting_result);`)
+
+### notification_system_setting_load_dnd_allow_exception  (notification_setting_service.c:633)  — body L634-703, 17 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L658-660 (`ERR("Failed to alloc memory");`)
+- [N2] if condition (not taken) — L670 (`if (!row_count) {`)
+- [N3] goto error/cleanup — L672 (`goto out;`)
+- [N4] memory allocation path — L674-678 (`dnd_allow_exception_data = (dnd_allow_exception_h)malloc(sizeof(struct notification_system_setting_dnd_allow_exception) `)
+- [N5] code: col_index = column_count; — L681 (`col_index = column_count;`)
+- [N6] code: for (i = 0; i < row_count; i++) { — L683-685 (`for (i = 0; i < row_count; i++) {`)
+- [N7] code: *dnd_allow_exception = dnd_allow_exception_data; — L689-690 (`*dnd_allow_exception = dnd_allow_exception_data;`)
+- [N8] code: sqlite3_free_table(query_result); — L694 (`sqlite3_free_table(query_result);`)
+
+### notification_system_setting_update_dnd_allow_exception  (notification_setting_service.c:705)  — body L707-742, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L722-724 (`ERR("Failed to alloc memory");`)
+- [N2] warning log path — L732 (`WARN("No changes on DB");`)
+
+### noti_system_setting_get_do_not_disturb  (notification_setting_service.c:744)  — body L746-794, 22 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: query = sqlite3_mprintf("SELECT do_not_disturb FROM %s WHERE uid = %d", — L759 (`query = sqlite3_mprintf("SELECT do_not_disturb FROM %s WHERE uid = %d",`)
+- [N2] NULL guard — L761-764 (`if (query == NULL) {`)
+- [N3] code: ret = sqlite3_get_table(db, query, &query_result, &row_count, &col_count, NULL); — L767-771 (`ret = sqlite3_get_table(db, query, &query_result, &row_count, &col_count, NULL);`)
+- [N4] code: col_index = col_count; — L774-776 (`col_index = col_count;`)
+- [N5] if condition (not taken) — L779-780 (`if (_get_table_field_data_int(query_result, (int *)do_not_disturb, col_index++) == false)`)
+- [N6] code: out: — L783-785 (`out:`)
+- [N7] if condition (not taken) — L787-788 (`if (query)`)
+- [N8] if condition (not taken) — L790-791 (`if (db)`)
+
+### notification_setting_db_update_app_disabled  (notification_setting_service.c:796)  — body L798-833, 3 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L817-818 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N2] code: ret = NOTIFICATION_ERROR_NOT_EXIST_ID; — L823 (`ret = NOTIFICATION_ERROR_NOT_EXIST_ID;`)
+
+### notification_setting_db_update_pkg_disabled  (notification_setting_service.c:835)  — body L837-872, 3 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: ret = NOTIFICATION_ERROR_OUT_OF_MEMORY; — L856-857 (`ret = NOTIFICATION_ERROR_OUT_OF_MEMORY;`)
+- [N2] code: ret = NOTIFICATION_ERROR_NOT_EXIST_ID; — L862 (`ret = NOTIFICATION_ERROR_NOT_EXIST_ID;`)
+
+## notification_db.c
+
+
+### notification_db_init  (notification_db.c:84)  — body L85-122, 3 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L109 (`ERR("Failed to exec query[%d][%s]", sql_ret, errmsg);`)
+- [N2] code: ret = __recover_corrupted_db(db); — L115 (`ret = __recover_corrupted_db(db);`)
+- [N3] cleanup/free path — L117 (`sqlite3_free(errmsg);`)
+
+### notification_db_open  (notification_db.c:124)  — body L125-146, 2 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: set_last_result(NOTIFICATION_ERROR_FROM_DB); — L131-132 (`set_last_result(NOTIFICATION_ERROR_FROM_DB);`)
+
+### notification_upgrade_db  (notification_db.c:362)  — body L363-447, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L408-410 (`ERR("@@ Failed to set verion query");`)
+- [N2] cleanup/free path — L438 (`sqlite3_free(errmsg);`)
+
+## notification_list.c
+
+
+### notification_list_append  (notification_list.c:164)  — body L166-204, 9 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L171-173 (`ERR("Invalid parameter");`)
+- [N2] error log path — L181-183 (`ERR("Failed to alloc memory");`)
+- [N3] error log path — L193-195 (`ERR("Failed to alloc memory");`)
+
+### notification_list_remove  (notification_list.c:206)  — body L208-245, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] NULL guard — L221-223 (`if (prev_list != NULL) {`)
+- [N2] code: next_list->prev = NULL; — L225 (`next_list->prev = NULL;`)
+
+### notification_get_list_for_uid  (notification_list.c:247)  — body L250-265, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] rpc-port/TIDL path — L257-258 (`ret = notification_tidl_request_load_noti_grouping_list(type, 1, count, &get_list, uid);`)
+- [N2] NULL guard — L261-262 (`if (get_list != NULL)`)
+
+### notification_get_list_by_page_for_uid  (notification_list.c:274)  — body L279-311, 8 uncovered line(s)
+**Uncovered branches:**
+- [N1] if condition (not taken) — L295-296 (`if (count_per_page > COUNT_PER_PAGE_MAX) {`)
+- [N2] rpc-port/TIDL path — L301 (`ret = notification_tidl_request_load_noti_grouping_list(type,`)
+- [N3] if condition (not taken) — L303-305 (`if (ret != NOTIFICATION_ERROR_NONE) {`)
+- [N4] code: *list = notification_list_get_head(get_list); — L308 (`*list = notification_list_get_head(get_list);`)
+- [N5] return propagated error — L310 (`return ret;`)
+
+### notification_get_detail_list_for_uid  (notification_list.c:320)  — body L326-342, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] rpc-port/TIDL path — L333 (`ret = notification_tidl_request_load_noti_detail_list(app_id, group_id, priv_id, count,`)
+- [N2] if condition (not taken) — L335 (`if (ret != NOTIFICATION_ERROR_NONE)`)
+- [N3] NULL guard — L338-339 (`if (get_list != NULL)`)
+
+## notification_status.c
+
+
+### notification_status_monitor_message_cb_set  (notification_status.c:73)  — body L75-113, 9 uncovered line(s)
+**Uncovered branches:**
+- [N1] if condition (not taken) — L91-92 (`if (!md.message_id) {`)
+- [N2] if condition (not taken) — L102-105 (`if (md.message_id == 0) {`)
+- [N3] code: md.callback = callback; — L109-110 (`md.callback = callback;`)
+- [N4] success return — L112 (`return NOTIFICATION_ERROR_NONE;`)
+
+### notification_status_monitor_message_cb_unset  (notification_status.c:115)  — body L117-132, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: g_dbus_connection_signal_unsubscribe(md.conn, md.message_id); — L119-120 (`g_dbus_connection_signal_unsubscribe(md.conn, md.message_id);`)
+- [N2] code: g_object_unref(md.conn); — L124-125 (`g_object_unref(md.conn);`)
+
+### notification_status_message_post  (notification_status.c:134)  — body L136-185, 11 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: param = g_variant_new("(s)", message); — L155 (`param = g_variant_new("(s)", message);`)
+- [N2] if condition (not taken) — L157 (`if (g_dbus_connection_emit_signal(conn,`)
+- [N3] error log path — L164 (`ERR("Failed to emit signal[%s]",`)
+- [N4] code: ret = NOTIFICATION_ERROR_FROM_DBUS; — L166-167 (`ret = NOTIFICATION_ERROR_FROM_DBUS;`)
+- [N5] NULL guard — L170-171 (`if (g_dbus_connection_flush_sync(conn, NULL, &err) == FALSE) {`)
+- [N6] code: ret = NOTIFICATION_ERROR_FROM_DBUS; — L173-174 (`ret = NOTIFICATION_ERROR_FROM_DBUS;`)
+- [N7] code: end: — L177 (`end:`)
+- [N8] code: g_object_unref(conn); — L182 (`g_object_unref(conn);`)
+
+## notification_viewer.c
+
+
+### notification_init_default_viewer  (notification_viewer.c:66)  — body L67-92, 7 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L75-76 (`ERR("can't access file_path(%s)", DEFAULT_VIEWER_CONF_FILE);`)
+- [N2] code: viewer = iniparser_getstring(dict, "Notification:DefaultViewer", NULL); — L85-87 (`viewer = iniparser_getstring(dict, "Notification:DefaultViewer", NULL);`)
+- [N3] code: iniparser_freedict(dict); — L89 (`iniparser_freedict(dict);`)
+- [N4] return error code — L91 (`return 0;`)
+
+## notification_ongoing.c
+_All EXPORT_API functions are 100% covered._
+
+
+## notification_ipc.c
+
+
+### notification_ipc_make_noti_from_gvariant  (notification_ipc.c:342)  — body L343-514, 4 uncovered line(s)
+**Uncovered branches:**
+- [N1] error log path — L378-379 (`ERR("Invalid noti NULL");`)
+- [N2] error log path — L383-384 (`ERR("Invalid variant NULL");`)
+
+## notification_internal_tidl.c
+
+
+### make_empty_notification  (notification_internal_tidl.c:57)  — body L58-318, 190 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: int ret; — L59-60 (`int ret;`)
+- [N2] warning log path — L62 (`WARN("make_empty_notification");`)
+- [N3] rpc-port/TIDL path — L64 (`rpc_port_proxy_notification_h handle = (rpc_port_proxy_notification_h)notihandle;`)
+- [N4] rpc-port/TIDL path — L66-68 (`ret = rpc_port_proxy_notification_set_type(handle, -1);`)
+- [N5] rpc-port/TIDL path — L70-72 (`ret = rpc_port_proxy_notification_set_layout(handle, -1);`)
+- [N6] rpc-port/TIDL path — L74-76 (`ret = rpc_port_proxy_notification_set_group_id(handle, -1);`)
+- [N7] rpc-port/TIDL path — L78-80 (`ret = rpc_port_proxy_notification_set_internal_group_id(handle, -1);`)
+- [N8] rpc-port/TIDL path — L82-84 (`ret = rpc_port_proxy_notification_set_priv_id(handle, -1);`)
+- [N9] rpc-port/TIDL path — L86-88 (`ret = rpc_port_proxy_notification_set_pkg_id(handle, "");`)
+- [N10] rpc-port/TIDL path — L90-92 (`ret = rpc_port_proxy_notification_set_caller_app_id(handle, "");`)
+- [N11] rpc-port/TIDL path — L94-96 (`ret = rpc_port_proxy_notification_set_launch_app_id(handle, "");`)
+- [N12] rpc-port/TIDL path — L98-100 (`ret = rpc_port_proxy_notification_set_args(handle, empty_bundle);`)
+- [N13] rpc-port/TIDL path — L102-104 (`ret = rpc_port_proxy_notification_set_group_args(handle, empty_bundle);`)
+- [N14] rpc-port/TIDL path — L106-108 (`ret = rpc_port_proxy_notification_set_execute_option(handle, empty_bundle);`)
+- [N15] rpc-port/TIDL path — L110-112 (`ret = rpc_port_proxy_notification_set_service_responding(handle, empty_bundle);`)
+- [N16] rpc-port/TIDL path — L114-116 (`ret = rpc_port_proxy_notification_set_service_single_launch(handle, empty_bundle);`)
+- [N17] rpc-port/TIDL path — L118-120 (`ret = rpc_port_proxy_notification_set_service_multi_launch(handle, empty_bundle);`)
+- [N18] rpc-port/TIDL path — L123-124 (`rpc_port_proxy_array_bundle_h _event_handler;`)
+- [N19] rpc-port/TIDL path — L126-128 (`ret = rpc_port_proxy_notification_set_event_handler(handle, _event_handler);`)
+- [N20] rpc-port/TIDL path — L130 (`rpc_port_proxy_array_bundle_destroy(_event_handler);`)
+- [N21] rpc-port/TIDL path — L133-135 (`ret = rpc_port_proxy_notification_set_domain(handle, "");`)
+- [N22] rpc-port/TIDL path — L137-139 (`ret = rpc_port_proxy_notification_set_dir(handle, "");`)
+- [N23] rpc-port/TIDL path — L141-143 (`ret = rpc_port_proxy_notification_set_text(handle, empty_bundle);`)
+- [N24] rpc-port/TIDL path — L145-147 (`ret = rpc_port_proxy_notification_set_key(handle, empty_bundle);`)
+- [N25] rpc-port/TIDL path — L149-151 (`ret = rpc_port_proxy_notification_set_format_args(handle, empty_bundle);`)
+- [N26] rpc-port/TIDL path — L153-155 (`ret = rpc_port_proxy_notification_set_num_format_args(handle, -1);`)
+- [N27] rpc-port/TIDL path — L157-159 (`ret = rpc_port_proxy_notification_set_image_path(handle, empty_bundle);`)
+- [N28] rpc-port/TIDL path — L161-163 (`ret = rpc_port_proxy_notification_set_priv_image_path(handle, empty_bundle);`)
+- [N29] rpc-port/TIDL path — L165-167 (`ret = rpc_port_proxy_notification_set_sound_type(handle, -1);`)
+- [N30] rpc-port/TIDL path — L169-171 (`ret = rpc_port_proxy_notification_set_sound_path(handle, "");`)
+- [N31] rpc-port/TIDL path — L173-175 (`ret = rpc_port_proxy_notification_set_priv_sound_path(handle, "");`)
+- [N32] rpc-port/TIDL path — L177-179 (`ret = rpc_port_proxy_notification_set_vibration_type(handle, -1);`)
+- [N33] rpc-port/TIDL path — L181-183 (`ret = rpc_port_proxy_notification_set_vibration_path(handle, "");`)
+- [N34] rpc-port/TIDL path — L185-187 (`ret = rpc_port_proxy_notification_set_priv_vibration_path(handle, "");`)
+- [N35] rpc-port/TIDL path — L189-191 (`ret = rpc_port_proxy_notification_set_led_operation(handle, -1);`)
+- [N36] rpc-port/TIDL path — L193-195 (`ret = rpc_port_proxy_notification_set_led_argb(handle, -1);`)
+- [N37] rpc-port/TIDL path — L197-199 (`ret = rpc_port_proxy_notification_set_led_on_ms(handle, -1);`)
+- [N38] rpc-port/TIDL path — L201-203 (`ret = rpc_port_proxy_notification_set_led_off_ms(handle, -1);`)
+- [N39] rpc-port/TIDL path — L205-207 (`ret = rpc_port_proxy_notification_set_time(handle, -1);`)
+- [N40] rpc-port/TIDL path — L209-211 (`ret = rpc_port_proxy_notification_set_insert_time(handle, -1);`)
+- [N41] rpc-port/TIDL path — L213-215 (`ret = rpc_port_proxy_notification_set_flags_for_property(handle, -1);`)
+- [N42] rpc-port/TIDL path — L217-219 (`ret = rpc_port_proxy_notification_set_display_applist(handle, -1);`)
+- [N43] rpc-port/TIDL path — L221-223 (`ret = rpc_port_proxy_notification_set_progress_size(handle, 0.0);`)
+- [N44] rpc-port/TIDL path — L225-227 (`ret = rpc_port_proxy_notification_set_progress_percentage(handle, 0.0);`)
+- [N45] rpc-port/TIDL path — L229-231 (`ret = rpc_port_proxy_notification_set_app_icon_path(handle, "");`)
+- [N46] rpc-port/TIDL path — L233-235 (`ret = rpc_port_proxy_notification_set_app_label(handle, "");`)
+- [N47] rpc-port/TIDL path — L237-239 (`ret = rpc_port_proxy_notification_set_temp_title(handle, "");`)
+- [N48] rpc-port/TIDL path — L241-243 (`ret = rpc_port_proxy_notification_set_temp_content(handle, "");`)
+- [N49] rpc-port/TIDL path — L245-247 (`ret = rpc_port_proxy_notification_set_tag(handle, "");`)
+- [N50] rpc-port/TIDL path — L249-251 (`ret = rpc_port_proxy_notification_set_ongoing_flag(handle, false);`)
+- [N51] rpc-port/TIDL path — L253-255 (`ret = rpc_port_proxy_notification_set_ongoing_value_type(handle, -1);`)
+- [N52] rpc-port/TIDL path — L257-259 (`ret = rpc_port_proxy_notification_set_ongoing_current(handle, -1);`)
+- [N53] rpc-port/TIDL path — L261-263 (`ret = rpc_port_proxy_notification_set_ongoing_duration(handle, -1);`)
+- [N54] rpc-port/TIDL path — L265-267 (`ret = rpc_port_proxy_notification_set_auto_remove(handle, false);`)
+- [N55] rpc-port/TIDL path — L269-271 (`ret = rpc_port_proxy_notification_set_default_button_index(handle, -1);`)
+- [N56] rpc-port/TIDL path — L273-275 (`ret = rpc_port_proxy_notification_set_hide_timeout(handle, -1);`)
+- [N57] rpc-port/TIDL path — L277-279 (`ret = rpc_port_proxy_notification_set_delete_timeout(handle, -1);`)
+- [N58] rpc-port/TIDL path — L281-283 (`ret = rpc_port_proxy_notification_set_text_input_max_length(handle, -1);`)
+- [N59] rpc-port/TIDL path — L285-287 (`ret = rpc_port_proxy_notification_set_event_flag(handle, false);`)
+- [N60] rpc-port/TIDL path — L289-291 (`ret = rpc_port_proxy_notification_set_is_translation(handle, false);`)
+- [N61] rpc-port/TIDL path — L293-295 (`ret = rpc_port_proxy_notification_set_extension_image_size(handle, -1);`)
+- [N62] rpc-port/TIDL path — L297-299 (`ret = rpc_port_proxy_notification_set_check_box(handle, false);`)
+- [N63] rpc-port/TIDL path — L301-303 (`ret = rpc_port_proxy_notification_set_check_box_value(handle, false);`)
+- [N64] rpc-port/TIDL path — L305-307 (`ret = rpc_port_proxy_notification_set_channel_name(handle, "");`)
+- [N65] rpc-port/TIDL path — L309-311 (`ret = rpc_port_proxy_notification_set_uid(handle, -1);`)
+- [N66] cleanup/free path — L313 (`bundle_free(empty_bundle);`)
+- [N67] warning log path — L315 (`WARN("make_empty_notification done");`)
+- [N68] success return — L317 (`return NOTIFICATION_ERROR_NONE;`)
+
+### make_notification_from_noti  (notification_internal_tidl.c:320)  — body L322-604, 207 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: int ret; — L323-324 (`int ret;`)
+- [N2] warning log path — L326 (`WARN("make_notification_from_noti");`)
+- [N3] rpc-port/TIDL path — L328 (`rpc_port_proxy_notification_h handle = (rpc_port_proxy_notification_h)notihandle;`)
+- [N4] if condition (not taken) — L330-331 (`if (translate)`)
+- [N5] rpc-port/TIDL path — L333-335 (`ret = rpc_port_proxy_notification_set_type(handle, (int)noti->type);`)
+- [N6] rpc-port/TIDL path — L337-339 (`ret = rpc_port_proxy_notification_set_layout(handle, (int)noti->layout);`)
+- [N7] rpc-port/TIDL path — L341-343 (`ret = rpc_port_proxy_notification_set_group_id(handle, noti->group_id);`)
+- [N8] rpc-port/TIDL path — L345-347 (`ret = rpc_port_proxy_notification_set_internal_group_id(handle, noti->internal_group_id);`)
+- [N9] rpc-port/TIDL path — L349-351 (`ret = rpc_port_proxy_notification_set_priv_id(handle, noti->priv_id);`)
+- [N10] rpc-port/TIDL path — L353-355 (`ret = rpc_port_proxy_notification_set_pkg_id(handle, __get_str_value(noti->pkg_id));`)
+- [N11] rpc-port/TIDL path — L357-359 (`ret = rpc_port_proxy_notification_set_caller_app_id(handle, __get_str_value(noti->caller_app_id));`)
+- [N12] rpc-port/TIDL path — L361-363 (`ret = rpc_port_proxy_notification_set_launch_app_id(handle, __get_str_value(noti->launch_app_id));`)
+- [N13] rpc-port/TIDL path — L365-368 (`ret = rpc_port_proxy_notification_set_args(handle,`)
+- [N14] rpc-port/TIDL path — L370-373 (`ret = rpc_port_proxy_notification_set_group_args(handle,`)
+- [N15] rpc-port/TIDL path — L375-378 (`ret = rpc_port_proxy_notification_set_execute_option(handle,`)
+- [N16] rpc-port/TIDL path — L380-383 (`ret = rpc_port_proxy_notification_set_service_responding(handle,`)
+- [N17] rpc-port/TIDL path — L385-388 (`ret = rpc_port_proxy_notification_set_service_single_launch(handle,`)
+- [N18] rpc-port/TIDL path — L390-393 (`ret = rpc_port_proxy_notification_set_service_multi_launch(handle,`)
+- [N19] rpc-port/TIDL path — L396-397 (`rpc_port_proxy_array_bundle_h _event_handler;`)
+- [N20] code: for (int i = 0; i < NOTIFICATION_EVENT_TYPE_MAX+1; i++) { — L399 (`for (int i = 0; i < NOTIFICATION_EVENT_TYPE_MAX+1; i++) {`)
+- [N21] NULL guard — L401-402 (`if (noti->b_event_handler[i] == NULL)`)
+- [N22] rpc-port/TIDL path — L405 (`rpc_port_proxy_array_bundle_set(_event_handler, noti->b_event_handler, NOTIFICATION_EVENT_TYPE_MAX+1);`)
+- [N23] rpc-port/TIDL path — L407-409 (`ret = rpc_port_proxy_notification_set_event_handler(handle, _event_handler);`)
+- [N24] rpc-port/TIDL path — L411 (`rpc_port_proxy_array_bundle_destroy(_event_handler);`)
+- [N25] rpc-port/TIDL path — L414-416 (`ret = rpc_port_proxy_notification_set_domain(handle, __get_str_value(noti->domain));`)
+- [N26] rpc-port/TIDL path — L418-420 (`ret = rpc_port_proxy_notification_set_dir(handle, __get_str_value(noti->dir));`)
+- [N27] rpc-port/TIDL path — L422-425 (`ret = rpc_port_proxy_notification_set_text(handle,`)
+- [N28] rpc-port/TIDL path — L427-430 (`ret = rpc_port_proxy_notification_set_key(handle,`)
+- [N29] rpc-port/TIDL path — L432-435 (`ret = rpc_port_proxy_notification_set_format_args(handle,`)
+- [N30] rpc-port/TIDL path — L437-439 (`ret = rpc_port_proxy_notification_set_num_format_args(handle, noti->num_format_args);`)
+- [N31] rpc-port/TIDL path — L441-444 (`ret = rpc_port_proxy_notification_set_image_path(handle,`)
+- [N32] rpc-port/TIDL path — L446-449 (`ret = rpc_port_proxy_notification_set_priv_image_path(handle,`)
+- [N33] rpc-port/TIDL path — L451-453 (`ret = rpc_port_proxy_notification_set_sound_type(handle, (int)noti->sound_type);`)
+- [N34] rpc-port/TIDL path — L455-457 (`ret = rpc_port_proxy_notification_set_sound_path(handle, __get_str_value(noti->sound_path));`)
+- [N35] rpc-port/TIDL path — L459-461 (`ret = rpc_port_proxy_notification_set_priv_sound_path(handle, __get_str_value(noti->priv_sound_path));`)
+- [N36] rpc-port/TIDL path — L463-465 (`ret = rpc_port_proxy_notification_set_vibration_type(handle, (int)noti->vibration_type);`)
+- [N37] rpc-port/TIDL path — L467-469 (`ret = rpc_port_proxy_notification_set_vibration_path(handle, __get_str_value(noti->vibration_path));`)
+- [N38] rpc-port/TIDL path — L471-473 (`ret = rpc_port_proxy_notification_set_priv_vibration_path(handle, __get_str_value(noti->priv_vibration_path));`)
+- [N39] rpc-port/TIDL path — L475-477 (`ret = rpc_port_proxy_notification_set_led_operation(handle, (int)noti->led_operation);`)
+- [N40] rpc-port/TIDL path — L479-481 (`ret = rpc_port_proxy_notification_set_led_argb(handle, noti->led_argb);`)
+- [N41] rpc-port/TIDL path — L483-485 (`ret = rpc_port_proxy_notification_set_led_on_ms(handle, noti->led_on_ms);`)
+- [N42] rpc-port/TIDL path — L487-489 (`ret = rpc_port_proxy_notification_set_led_off_ms(handle, noti->led_off_ms);`)
+- [N43] rpc-port/TIDL path — L491-493 (`ret = rpc_port_proxy_notification_set_time(handle, (long long)noti->time);`)
+- [N44] rpc-port/TIDL path — L495-497 (`ret = rpc_port_proxy_notification_set_insert_time(handle, (long long)noti->insert_time);`)
+- [N45] rpc-port/TIDL path — L499-501 (`ret = rpc_port_proxy_notification_set_flags_for_property(handle, noti->flags_for_property);`)
+- [N46] rpc-port/TIDL path — L503-505 (`ret = rpc_port_proxy_notification_set_display_applist(handle, noti->display_applist);`)
+- [N47] rpc-port/TIDL path — L507-509 (`ret = rpc_port_proxy_notification_set_progress_size(handle, noti->progress_size);`)
+- [N48] rpc-port/TIDL path — L511-513 (`ret = rpc_port_proxy_notification_set_progress_percentage(handle, noti->progress_percentage);`)
+- [N49] rpc-port/TIDL path — L515-517 (`ret = rpc_port_proxy_notification_set_app_icon_path(handle, __get_str_value(noti->app_icon_path));`)
+- [N50] rpc-port/TIDL path — L519-521 (`ret = rpc_port_proxy_notification_set_app_label(handle, __get_str_value(noti->app_label));`)
+- [N51] rpc-port/TIDL path — L523-525 (`ret = rpc_port_proxy_notification_set_temp_title(handle, __get_str_value(noti->temp_title));`)
+- [N52] rpc-port/TIDL path — L527-529 (`ret = rpc_port_proxy_notification_set_temp_content(handle, __get_str_value(noti->temp_content));`)
+- [N53] rpc-port/TIDL path — L531-533 (`ret = rpc_port_proxy_notification_set_tag(handle, __get_str_value(noti->tag));`)
+- [N54] rpc-port/TIDL path — L535-537 (`ret = rpc_port_proxy_notification_set_ongoing_flag(handle, noti->ongoing_flag);`)
+- [N55] rpc-port/TIDL path — L539-541 (`ret = rpc_port_proxy_notification_set_ongoing_value_type(handle, noti->ongoing_value_type);`)
+- [N56] rpc-port/TIDL path — L543-545 (`ret = rpc_port_proxy_notification_set_ongoing_current(handle, noti->ongoing_current);`)
+- [N57] rpc-port/TIDL path — L547-549 (`ret = rpc_port_proxy_notification_set_ongoing_duration(handle, noti->ongoing_duration);`)
+- [N58] rpc-port/TIDL path — L551-553 (`ret = rpc_port_proxy_notification_set_auto_remove(handle, noti->auto_remove);`)
+- [N59] rpc-port/TIDL path — L555-557 (`ret = rpc_port_proxy_notification_set_default_button_index(handle, (int)noti->default_button_index);`)
+- [N60] rpc-port/TIDL path — L559-561 (`ret = rpc_port_proxy_notification_set_hide_timeout(handle, noti->hide_timeout);`)
+- [N61] rpc-port/TIDL path — L563-565 (`ret = rpc_port_proxy_notification_set_delete_timeout(handle, noti->delete_timeout);`)
+- [N62] rpc-port/TIDL path — L567-569 (`ret = rpc_port_proxy_notification_set_text_input_max_length(handle, noti->text_input_max_length);`)
+- [N63] rpc-port/TIDL path — L571-573 (`ret = rpc_port_proxy_notification_set_event_flag(handle, noti->event_flag);`)
+- [N64] rpc-port/TIDL path — L575-577 (`ret = rpc_port_proxy_notification_set_is_translation(handle, noti->is_translation);`)
+- [N65] rpc-port/TIDL path — L579-581 (`ret = rpc_port_proxy_notification_set_extension_image_size(handle, noti->extension_image_size);`)
+- [N66] rpc-port/TIDL path — L583-585 (`ret = rpc_port_proxy_notification_set_check_box(handle, noti->check_box);`)
+- [N67] rpc-port/TIDL path — L587-589 (`ret = rpc_port_proxy_notification_set_check_box_value(handle, noti->check_box_value);`)
+- [N68] rpc-port/TIDL path — L591-593 (`ret = rpc_port_proxy_notification_set_channel_name(handle, __get_str_value(noti->channel_name));`)
+- [N69] rpc-port/TIDL path — L595-597 (`ret = rpc_port_proxy_notification_set_uid(handle, (int)noti->uid);`)
+- [N70] cleanup/free path — L599 (`bundle_free(empty_bundle);`)
+- [N71] warning log path — L601 (`WARN("make_notification_from_noti done");`)
+- [N72] success return — L603 (`return NOTIFICATION_ERROR_NONE;`)
+
+### make_noti_from_notification  (notification_internal_tidl.c:606)  — body L607-1124, 355 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: notification_h _noti; — L608-609 (`notification_h _noti;`)
+- [N2] warning log path — L611 (`WARN("make_noti_from_notification");`)
+- [N3] rpc-port/TIDL path — L613 (`rpc_port_proxy_notification_h handle = (rpc_port_proxy_notification_h)notihandle;`)
+- [N4] memory allocation path — L615-618 (`_noti = (notification_h)calloc(1, sizeof(struct _notification));`)
+- [N5] code: int _type; — L621-625 (`int _type;`)
+- [N6] code: int _layout; — L627-631 (`int _layout;`)
+- [N7] rpc-port/TIDL path — L633-635 (`ret = rpc_port_proxy_notification_get_group_id(handle, &_noti->group_id);`)
+- [N8] rpc-port/TIDL path — L637-639 (`ret = rpc_port_proxy_notification_get_internal_group_id(handle, &_noti->internal_group_id);`)
+- [N9] rpc-port/TIDL path — L641-643 (`ret = rpc_port_proxy_notification_get_priv_id(handle, &_noti->priv_id);`)
+- [N10] code: char *pkg_id; — L645-648 (`char *pkg_id;`)
+- [N11] if condition (not taken) — L650-651 (`if (strlen(pkg_id) > 0) {`)
+- [N12] code: _noti->pkg_id = NULL; — L653-654 (`_noti->pkg_id = NULL;`)
+- [N13] code: char *caller_app_id; — L657-660 (`char *caller_app_id;`)
+- [N14] if condition (not taken) — L662-663 (`if (strlen(caller_app_id) > 0) {`)
+- [N15] code: _noti->caller_app_id = NULL; — L665-666 (`_noti->caller_app_id = NULL;`)
+- [N16] code: char *launch_app_id; — L669-672 (`char *launch_app_id;`)
+- [N17] if condition (not taken) — L674-675 (`if (strlen(launch_app_id) > 0) {`)
+- [N18] code: _noti->launch_app_id = NULL; — L677-678 (`_noti->launch_app_id = NULL;`)
+- [N19] code: bundle *args; — L681-684 (`bundle *args;`)
+- [N20] if condition (not taken) — L686-687 (`if (bundle_get_count(args) > 0) {`)
+- [N21] code: _noti->args = NULL; — L689-690 (`_noti->args = NULL;`)
+- [N22] code: bundle *group_args; — L693-696 (`bundle *group_args;`)
+- [N23] if condition (not taken) — L698-699 (`if (bundle_get_count(group_args) > 0) {`)
+- [N24] code: _noti->group_args = NULL; — L701-702 (`_noti->group_args = NULL;`)
+- [N25] code: bundle *b_execute_option; — L705-708 (`bundle *b_execute_option;`)
+- [N26] if condition (not taken) — L710-711 (`if (bundle_get_count(b_execute_option) > 0) {`)
+- [N27] code: _noti->b_execute_option = NULL; — L713-714 (`_noti->b_execute_option = NULL;`)
+- [N28] code: bundle *b_service_responding; — L717-720 (`bundle *b_service_responding;`)
+- [N29] if condition (not taken) — L722-723 (`if (bundle_get_count(b_service_responding) > 0) {`)
+- [N30] code: _noti->b_service_responding = NULL; — L725-726 (`_noti->b_service_responding = NULL;`)
+- [N31] code: bundle *b_service_single_launch; — L729-732 (`bundle *b_service_single_launch;`)
+- [N32] if condition (not taken) — L734-735 (`if (bundle_get_count(b_service_single_launch) > 0) {`)
+- [N33] code: _noti->b_service_single_launch = NULL; — L737-738 (`_noti->b_service_single_launch = NULL;`)
+- [N34] code: bundle *b_service_multi_launch; — L741-744 (`bundle *b_service_multi_launch;`)
+- [N35] if condition (not taken) — L746-747 (`if (bundle_get_count(b_service_multi_launch) > 0) {`)
+- [N36] code: _noti->b_service_multi_launch = NULL; — L749-750 (`_noti->b_service_multi_launch = NULL;`)
+- [N37] rpc-port/TIDL path — L754-757 (`rpc_port_proxy_array_bundle_h _event_handler;`)
+- [N38] warning log path — L759 (`WARN("make_noti_from_notification event handler");`)
+- [N39] code: int bundle_size; — L761-762 (`int bundle_size;`)
+- [N40] if condition (not taken) — L764-766 (`if (_event_handler) {`)
+- [N41] if condition (not taken) — L768-769 (`if (ret != RPC_PORT_ERROR_NONE) {`)
+- [N42] code: for (int i = 0; i < bundle_size; i++) { — L771-773 (`for (int i = 0; i < bundle_size; i++) {`)
+- [N43] code: int __count = 0; — L775-776 (`int __count = 0;`)
+- [N44] if condition (not taken) — L778-779 (`if (__count > 0)`)
+- [N45] code: _noti->b_event_handler[i] = NULL; — L781 (`_noti->b_event_handler[i] = NULL;`)
+- [N46] rpc-port/TIDL path — L785 (`rpc_port_proxy_array_bundle_destroy(_event_handler);`)
+- [N47] warning log path — L787 (`WARN("make_noti_from_notification event handler null");`)
+- [N48] code: char *domain; — L791-794 (`char *domain;`)
+- [N49] if condition (not taken) — L796-797 (`if (strlen(domain) > 0) {`)
+- [N50] code: _noti->domain = NULL; — L799-800 (`_noti->domain = NULL;`)
+- [N51] code: char *dir; — L803-806 (`char *dir;`)
+- [N52] if condition (not taken) — L808-809 (`if (strlen(dir) > 0) {`)
+- [N53] code: _noti->dir = NULL; — L811-812 (`_noti->dir = NULL;`)
+- [N54] code: bundle *b_text; — L815-818 (`bundle *b_text;`)
+- [N55] if condition (not taken) — L820-821 (`if (bundle_get_count(b_text) > 0) {`)
+- [N56] code: _noti->b_text = NULL; — L823-824 (`_noti->b_text = NULL;`)
+- [N57] code: bundle *b_key; — L827-830 (`bundle *b_key;`)
+- [N58] if condition (not taken) — L832-833 (`if (bundle_get_count(b_key) > 0) {`)
+- [N59] code: _noti->b_key = NULL; — L835-836 (`_noti->b_key = NULL;`)
+- [N60] code: bundle *b_format_args; — L839-842 (`bundle *b_format_args;`)
+- [N61] if condition (not taken) — L844-845 (`if (bundle_get_count(b_format_args) > 0) {`)
+- [N62] code: _noti->b_format_args = NULL; — L847-848 (`_noti->b_format_args = NULL;`)
+- [N63] rpc-port/TIDL path — L851-853 (`ret = rpc_port_proxy_notification_get_num_format_args(handle, &_noti->num_format_args);`)
+- [N64] code: bundle *b_image_path; — L855-858 (`bundle *b_image_path;`)
+- [N65] if condition (not taken) — L860-861 (`if (bundle_get_count(b_image_path) > 0) {`)
+- [N66] code: _noti->b_image_path = NULL; — L863-864 (`_noti->b_image_path = NULL;`)
+- [N67] code: bundle *b_priv_image_path; — L867-870 (`bundle *b_priv_image_path;`)
+- [N68] if condition (not taken) — L872-873 (`if (bundle_get_count(b_priv_image_path) > 0) {`)
+- [N69] code: _noti->b_priv_image_path = NULL; — L875-876 (`_noti->b_priv_image_path = NULL;`)
+- [N70] code: int _sound_type; — L879-883 (`int _sound_type;`)
+- [N71] code: char *sound_path; — L885-888 (`char *sound_path;`)
+- [N72] if condition (not taken) — L890-891 (`if (strlen(sound_path) > 0) {`)
+- [N73] code: _noti->sound_path = NULL; — L893-894 (`_noti->sound_path = NULL;`)
+- [N74] code: char *priv_sound_path; — L897-900 (`char *priv_sound_path;`)
+- [N75] if condition (not taken) — L902-903 (`if (strlen(priv_sound_path) > 0) {`)
+- [N76] code: _noti->priv_sound_path = NULL; — L905-906 (`_noti->priv_sound_path = NULL;`)
+- [N77] rpc-port/TIDL path — L909-911 (`ret = rpc_port_proxy_notification_get_vibration_type(handle, &_noti->vibration_type);`)
+- [N78] code: char *vibration_path; — L913-916 (`char *vibration_path;`)
+- [N79] if condition (not taken) — L918-919 (`if (strlen(vibration_path) > 0) {`)
+- [N80] code: _noti->vibration_path = NULL; — L921-922 (`_noti->vibration_path = NULL;`)
+- [N81] code: char *priv_vibration_path; — L925-928 (`char *priv_vibration_path;`)
+- [N82] if condition (not taken) — L930-931 (`if (strlen(priv_vibration_path) > 0) {`)
+- [N83] code: _noti->priv_vibration_path = NULL; — L933-934 (`_noti->priv_vibration_path = NULL;`)
+- [N84] code: int _led_operation; — L937-941 (`int _led_operation;`)
+- [N85] rpc-port/TIDL path — L943-945 (`ret = rpc_port_proxy_notification_get_led_argb(handle, &_noti->led_argb);`)
+- [N86] rpc-port/TIDL path — L947-949 (`ret = rpc_port_proxy_notification_get_led_on_ms(handle, &_noti->led_on_ms);`)
+- [N87] rpc-port/TIDL path — L951-953 (`ret = rpc_port_proxy_notification_get_led_off_ms(handle, &_noti->led_off_ms);`)
+- [N88] code: long long _time; — L955-959 (`long long _time;`)
+- [N89] code: long long _insert_time; — L961-965 (`long long _insert_time;`)
+- [N90] rpc-port/TIDL path — L967-969 (`ret = rpc_port_proxy_notification_get_flags_for_property(handle, &_noti->flags_for_property);`)
+- [N91] rpc-port/TIDL path — L971-973 (`ret = rpc_port_proxy_notification_get_display_applist(handle, &_noti->display_applist);`)
+- [N92] rpc-port/TIDL path — L975-977 (`ret = rpc_port_proxy_notification_get_progress_size(handle, &_noti->progress_size);`)
+- [N93] rpc-port/TIDL path — L979-981 (`ret = rpc_port_proxy_notification_get_progress_percentage(handle, &_noti->progress_percentage);`)
+- [N94] code: char *app_icon_path; — L983-986 (`char *app_icon_path;`)
+- [N95] if condition (not taken) — L988-989 (`if (strlen(app_icon_path) > 0) {`)
+- [N96] code: _noti->app_icon_path = NULL; — L991-992 (`_noti->app_icon_path = NULL;`)
+- [N97] code: char *app_label; — L995-998 (`char *app_label;`)
+- [N98] if condition (not taken) — L1000-1001 (`if (strlen(app_label) > 0) {`)
+- [N99] code: _noti->app_label = NULL; — L1003-1004 (`_noti->app_label = NULL;`)
+- [N100] code: char *temp_title; — L1007-1010 (`char *temp_title;`)
+- [N101] if condition (not taken) — L1012-1013 (`if (strlen(temp_title) > 0) {`)
+- [N102] code: _noti->temp_title = NULL; — L1015-1016 (`_noti->temp_title = NULL;`)
+- [N103] code: char *temp_content; — L1019-1022 (`char *temp_content;`)
+- [N104] if condition (not taken) — L1024-1025 (`if (strlen(temp_content) > 0) {`)
+- [N105] code: _noti->temp_content = NULL; — L1027-1028 (`_noti->temp_content = NULL;`)
+- [N106] code: char *tag; — L1031-1034 (`char *tag;`)
+- [N107] if condition (not taken) — L1036-1037 (`if (strlen(tag) > 0) {`)
+- [N108] code: _noti->tag = NULL; — L1039-1040 (`_noti->tag = NULL;`)
+- [N109] rpc-port/TIDL path — L1043-1045 (`ret = rpc_port_proxy_notification_get_ongoing_flag(handle, &_noti->ongoing_flag);`)
+- [N110] rpc-port/TIDL path — L1047-1049 (`ret = rpc_port_proxy_notification_get_ongoing_value_type(handle, &_noti->ongoing_value_type);`)
+- [N111] rpc-port/TIDL path — L1051-1053 (`ret = rpc_port_proxy_notification_get_ongoing_current(handle, &_noti->ongoing_current);`)
+- [N112] rpc-port/TIDL path — L1055-1057 (`ret = rpc_port_proxy_notification_get_ongoing_duration(handle, &_noti->ongoing_duration);`)
+- [N113] rpc-port/TIDL path — L1059-1061 (`ret = rpc_port_proxy_notification_get_auto_remove(handle, &_noti->auto_remove);`)
+- [N114] code: int _index; — L1063-1067 (`int _index;`)
+- [N115] rpc-port/TIDL path — L1069-1071 (`ret = rpc_port_proxy_notification_get_hide_timeout(handle, &_noti->hide_timeout);`)
+- [N116] rpc-port/TIDL path — L1073-1075 (`ret = rpc_port_proxy_notification_get_delete_timeout(handle, &_noti->delete_timeout);`)
+- [N117] rpc-port/TIDL path — L1077-1079 (`ret = rpc_port_proxy_notification_get_text_input_max_length(handle, &_noti->text_input_max_length);`)
+- [N118] rpc-port/TIDL path — L1081-1083 (`ret = rpc_port_proxy_notification_get_event_flag(handle, &_noti->event_flag);`)
+- [N119] rpc-port/TIDL path — L1085-1087 (`ret = rpc_port_proxy_notification_get_is_translation(handle, &_noti->is_translation);`)
+- [N120] rpc-port/TIDL path — L1089-1091 (`ret = rpc_port_proxy_notification_get_extension_image_size(handle, &_noti->extension_image_size);`)
+- [N121] rpc-port/TIDL path — L1093-1095 (`ret = rpc_port_proxy_notification_get_check_box(handle, &_noti->check_box);`)
+- [N122] rpc-port/TIDL path — L1097-1099 (`ret = rpc_port_proxy_notification_get_check_box_value(handle, &_noti->check_box_value);`)
+- [N123] code: char *channel_name; — L1101-1104 (`char *channel_name;`)
+- [N124] if condition (not taken) — L1106-1107 (`if (strlen(channel_name) > 0) {`)
+- [N125] code: _noti->channel_name = NULL; — L1109-1110 (`_noti->channel_name = NULL;`)
+- [N126] code: int _uid; — L1113-1117 (`int _uid;`)
+- [N127] code: *noti = _noti; — L1119 (`*noti = _noti;`)
+- [N128] warning log path — L1121 (`WARN("make_noti_from_notification done : %d", _uid);`)
+
+### make_setting_from_noti_system_setting  (notification_internal_tidl.c:1163)  — body L1165-1208, 23 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: notification_system_setting_h _setting; — L1166-1167 (`notification_system_setting_h _setting;`)
+- [N2] warning log path — L1169 (`WARN("make_setting_from_noti_system_setting");`)
+- [N3] memory allocation path — L1171-1174 (`_setting = (notification_system_setting_h)calloc(1, sizeof(struct notification_system_setting));`)
+- [N4] rpc-port/TIDL path — L1177 (`rpc_port_proxy_noti_system_setting_get_do_not_disturb(handle, &_setting->do_not_disturb);`)
+- [N5] rpc-port/TIDL path — L1179 (`rpc_port_proxy_noti_system_setting_get_visibility_class(handle, &_setting->visibility_class);`)
+- [N6] rpc-port/TIDL path — L1181 (`rpc_port_proxy_noti_system_setting_get_dnd_schedule_enabled(handle, &_setting->dnd_schedule_enabled);`)
+- [N7] rpc-port/TIDL path — L1183 (`rpc_port_proxy_noti_system_setting_get_dnd_schedule_day(handle, &_setting->dnd_schedule_day);`)
+- [N8] rpc-port/TIDL path — L1185 (`rpc_port_proxy_noti_system_setting_get_dnd_start_hour(handle, &_setting->dnd_start_hour);`)
+- [N9] rpc-port/TIDL path — L1187 (`rpc_port_proxy_noti_system_setting_get_dnd_start_min(handle, &_setting->dnd_start_min);`)
+- [N10] rpc-port/TIDL path — L1189 (`rpc_port_proxy_noti_system_setting_get_dnd_end_hour(handle, &_setting->dnd_end_hour);`)
+- [N11] rpc-port/TIDL path — L1191 (`rpc_port_proxy_noti_system_setting_get_dnd_end_min(handle, &_setting->dnd_end_min);`)
+- [N12] code: int _lock_screen_content_level; — L1193-1195 (`int _lock_screen_content_level;`)
+- [N13] rpc-port/TIDL path — L1197-1198 (`rpc_port_proxy_list_noti_system_setting_dnd_allow_exception_h dnd_allow_list;`)
+- [N14] rpc-port/TIDL path — L1200 (`rpc_port_proxy_list_noti_system_setting_dnd_allow_exception_foreach(dnd_allow_list,`)
+- [N15] code: *setting = _setting; — L1203 (`*setting = _setting;`)
+- [N16] warning log path — L1205 (`WARN("make_setting_from_noti_system_setting done");`)
+
+### make_dnd_allow_exception_from_exception  (notification_internal_tidl.c:1210)  — body L1212-1229, 6 uncovered line(s)
+**Uncovered branches:**
+- [N1] rpc-port/TIDL path — L1220-1222 (`ret = rpc_port_proxy_noti_system_setting_dnd_allow_exception_set_type(_exception_handle, dnd_allow_exception->type);`)
+- [N2] rpc-port/TIDL path — L1224-1226 (`ret = rpc_port_proxy_noti_system_setting_dnd_allow_exception_set_value(_exception_handle, dnd_allow_exception->value);`)
+
+### make_noti_system_setting_from_setting  (notification_internal_tidl.c:1231)  — body L1233-1310, 53 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: int ret; — L1234-1238 (`int ret;`)
+- [N2] rpc-port/TIDL path — L1240-1242 (`ret = rpc_port_proxy_noti_system_setting_set_do_not_disturb(handle, setting->do_not_disturb);`)
+- [N3] rpc-port/TIDL path — L1244-1246 (`ret = rpc_port_proxy_noti_system_setting_set_visibility_class(handle, setting->visibility_class);`)
+- [N4] rpc-port/TIDL path — L1248-1250 (`ret = rpc_port_proxy_noti_system_setting_set_dnd_schedule_enabled(handle, setting->dnd_schedule_enabled);`)
+- [N5] rpc-port/TIDL path — L1252-1254 (`ret = rpc_port_proxy_noti_system_setting_set_dnd_schedule_day(handle, setting->dnd_schedule_day);`)
+- [N6] rpc-port/TIDL path — L1256-1258 (`ret = rpc_port_proxy_noti_system_setting_set_dnd_start_hour(handle, setting->dnd_start_hour);`)
+- [N7] rpc-port/TIDL path — L1260-1262 (`ret = rpc_port_proxy_noti_system_setting_set_dnd_start_min(handle, setting->dnd_start_min);`)
+- [N8] rpc-port/TIDL path — L1264-1266 (`ret = rpc_port_proxy_noti_system_setting_set_dnd_end_hour(handle, setting->dnd_end_hour);`)
+- [N9] rpc-port/TIDL path — L1268-1270 (`ret = rpc_port_proxy_noti_system_setting_set_dnd_end_min(handle, setting->dnd_end_min);`)
+- [N10] rpc-port/TIDL path — L1272-1274 (`ret = rpc_port_proxy_noti_system_setting_set_lock_screen_content_level(handle, setting->lock_screen_content_level);`)
+- [N11] if condition (not taken) — L1276-1280 (`if (g_list_length(setting->dnd_allow_exceptions) > 0) {`)
+- [N12] code: setting->dnd_allow_exceptions = g_list_first(setting->dnd_allow_exceptions); — L1283 (`setting->dnd_allow_exceptions = g_list_first(setting->dnd_allow_exceptions);`)
+- [N13] NULL guard — L1285-1286 (`for (GList *iter = setting->dnd_allow_exceptions; iter != NULL; iter = iter->next) {`)
+- [N14] rpc-port/TIDL path — L1288-1290 (`ret = rpc_port_proxy_noti_system_setting_dnd_allow_exception_create(&exception_handle);`)
+- [N15] rpc-port/TIDL path — L1292-1294 (`ret = rpc_port_proxy_list_noti_system_setting_dnd_allow_exception_add(list_handle, exception_handle);`)
+- [N16] rpc-port/TIDL path — L1296-1298 (`ret = rpc_port_proxy_noti_system_setting_dnd_allow_exception_destroy(exception_handle);`)
+- [N17] error log path — L1300 (`ERR("failed to create system setting dnd allow exception");`)
+- [N18] rpc-port/TIDL path — L1304-1306 (`ret = rpc_port_proxy_noti_system_setting_set_dnd_allow_exceptions(handle, list_handle);`)
+
+### make_setting_from_noti_setting  (notification_internal_tidl.c:1312)  — body L1314-1384, 51 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: int ret; — L1315-1324 (`int ret;`)
+- [N2] warning log path — L1326 (`WARN("make_setting_from_noti_setting");`)
+- [N3] rpc-port/TIDL path — L1328-1330 (`ret = rpc_port_proxy_noti_setting_get_package_name(handle, &pkg_name);`)
+- [N4] rpc-port/TIDL path — L1332-1334 (`ret = rpc_port_proxy_noti_setting_get_app_id(handle, &app_id);`)
+- [N5] rpc-port/TIDL path — L1336-1338 (`ret = rpc_port_proxy_noti_setting_get_allow_to_notify(handle, &allow_to_notify);`)
+- [N6] rpc-port/TIDL path — L1340-1342 (`ret = rpc_port_proxy_noti_setting_get_do_not_disturb_except(handle, &dnd_except);`)
+- [N7] rpc-port/TIDL path — L1344-1346 (`ret = rpc_port_proxy_noti_setting_get_pop_up_notification(handle, &pop_up_noti);`)
+- [N8] rpc-port/TIDL path — L1348-1350 (`ret = rpc_port_proxy_noti_setting_get_visibility_class(handle,&visibility_class);`)
+- [N9] rpc-port/TIDL path — L1352-1354 (`ret = rpc_port_proxy_noti_setting_get_lock_screen_content_level(handle, &lock_screen_content_level);`)
+- [N10] rpc-port/TIDL path — L1356-1358 (`ret = rpc_port_proxy_noti_setting_get_app_disabled(handle, &app_disabled);`)
+- [N11] if condition (not taken) — L1360-1361 (`if (strlen(pkg_name) > 0) {`)
+- [N12] code: setting->package_name = NULL; — L1363-1364 (`setting->package_name = NULL;`)
+- [N13] if condition (not taken) — L1367-1368 (`if (strlen(app_id) > 0) {`)
+- [N14] code: setting->app_id = NULL; — L1370-1371 (`setting->app_id = NULL;`)
+- [N15] code: setting->allow_to_notify = allow_to_notify; — L1374-1379 (`setting->allow_to_notify = allow_to_notify;`)
+- [N16] warning log path — L1381 (`WARN("make_setting_from_noti_setting done");`)
+- [N17] success return — L1383 (`return NOTIFICATION_ERROR_NONE;`)
+
+### make_noti_setting_from_setting  (notification_internal_tidl.c:1386)  — body L1388-1425, 27 uncovered line(s)
+**Uncovered branches:**
+- [N1] code: int ret; — L1389-1390 (`int ret;`)
+- [N2] rpc-port/TIDL path — L1392-1394 (`ret = rpc_port_proxy_noti_setting_set_package_name(handle, __get_str_value(setting->package_name));`)
+- [N3] rpc-port/TIDL path — L1396-1398 (`ret = rpc_port_proxy_noti_setting_set_app_id(handle, __get_str_value(setting->app_id));`)
+- [N4] rpc-port/TIDL path — L1400-1402 (`ret = rpc_port_proxy_noti_setting_set_allow_to_notify(handle, setting->allow_to_notify);`)
+- [N5] rpc-port/TIDL path — L1404-1406 (`ret = rpc_port_proxy_noti_setting_set_do_not_disturb_except(handle, setting->do_not_disturb_except);`)
+- [N6] rpc-port/TIDL path — L1408-1410 (`ret = rpc_port_proxy_noti_setting_set_pop_up_notification(handle, setting->pop_up_notification);`)
+- [N7] rpc-port/TIDL path — L1412-1414 (`ret = rpc_port_proxy_noti_setting_set_visibility_class(handle, setting->visibility_class);`)
+- [N8] rpc-port/TIDL path — L1416-1418 (`ret = rpc_port_proxy_noti_setting_set_lock_screen_content_level(handle, (int)setting->lock_screen_content_level);`)
+- [N9] rpc-port/TIDL path — L1420-1422 (`ret = rpc_port_proxy_noti_setting_set_app_disabled(handle, setting->app_disabled);`)
+- [N10] success return — L1424 (`return NOTIFICATION_ERROR_NONE;`)
+
+## notification_tidl.c
+_All EXPORT_API functions are 100% covered._
+
+
+## notification_tidl_proxy.c
+_All EXPORT_API functions are 100% covered._
+
+
+## Per-file summary
+
+| File | EXPORT_API funcs w/ gaps | Total uncovered lines |
+|---|---:|---:|
+| notification.c | 17 | 175 |
+| notification_internal.c | 24 | 228 |
+| notification_noti.c | 24 | 317 |
+| notification_setting.c | 8 | 88 |
+| notification_setting_service.c | 8 | 83 |
+| notification_db.c | 3 | 9 |
+| notification_list.c | 5 | 29 |
+| notification_status.c | 3 | 24 |
+| notification_viewer.c | 1 | 7 |
+| notification_ongoing.c | 0 | 0 |
+| notification_ipc.c | 1 | 4 |
+| notification_internal_tidl.c | 8 | 912 |
+| notification_tidl.c | 0 | 0 |
+| notification_tidl_proxy.c | 0 | 0 |
