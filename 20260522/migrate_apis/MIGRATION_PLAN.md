@@ -259,11 +259,40 @@ Concrete targets per `analysis/dpm_exclusive.tsv`:
       that no consumer outside `data-provider-master` references any moved symbol.
 - [ ] (Optional) bump `notification.spec` Version + CMake `MAJORVER` to signal the reduced
       symbol surface. Left to the project maintainer.
-- [ ] `gbs build` both packages in a Tizen chroot. (Cannot be done from this host —
-      no Tizen pkg-config deps installed.)
-- [ ] `nm -D libnotification.so | grep <removed-symbol>` returns empty;
-      `nm -D libdata-provider-master.so | grep <removed-symbol>` returns the symbols.
-      To be verified after `gbs build`.
+- [x] `gbs build -A armv7l` both packages — **both succeed**. `notification` %check: 82
+      tests passed; `data-provider-master` %check: 5 tests passed.
+      Post-migration build fixes that were required (the original Phase 1–3b commits did
+      not actually compile):
+      - notification: re-added the pure tag-string helpers (`notification_noti_set_tag`,
+        `_strip_tag`, `_get_tag_type` + `TAG_*` macros) as file-local statics in
+        `notification.c` — they were dragged out with `notification_noti.c` but
+        `notification_get_time_from_text`/`_set_time_to_text` (client APIs) still need them.
+      - notification: added `#include <sys/statvfs.h>` to trimmed `notification_shared_file.c`.
+      - notification: fixed the re-added `notification_channel_free` declaration in
+        `notification_internal.h` (`int` → `void`, matching the implementation).
+      - notification: stubbed `notification_system_setting_dnd_schedule_get_enabled` in
+        `notification-test-app/main.cc` (moved getter).
+      - DPM: `debug.h` now `#include <dlog.h>` (was using `SECURE_LOG*` undeclared).
+      - DPM: `dpm_internal.c` got the file-local `notification_channel_s` struct +
+        `PAIRING_TYPE_KEY`; `dpm_internal.h` signatures corrected to match impls.
+      - DPM: `dpm_setting.c` got `<package_manager.h>`, `<pkgmgr-info.h>`,
+        `<notification_db.h>`, `notification_db_query.h` includes + the `setting_local_info`
+        struct and `NOTIFICATION_PRIVILEGE`.
+      - DPM: `dpm_db.c` got `<unistd.h>`.
+      - DPM: `notification_service_tidl.c`/`notification_noti.c`/`service_common.cc`/
+        `notification_ex_service.cc` got the missing `dpm_*.h` includes.
+      - DPM: `dpm_shared_file.c` forward-decl of `__set_sharing_for_new_file` fixed
+        (`gboolean` → `bool`).
+      - DPM unittests: the 33 migrated symbols added to `notification_mock.{h,cc}` so the
+        `data-provider-master-unittests` binary links (they were resolved from
+        `-lnotification` before the migration).
+- [x] `nm -D libnotification.so` no longer exports the moved symbols;
+      `nm -D libdata-provider-master.so` exports them. Verified on the built RPMs
+      (`notification_noti_insert`, `notification_setting_get_allow_to_notify`,
+      `notification_channel_get_name`, `notification_system_setting_dnd_schedule_get_enabled`,
+      `notification_calibrate_private_sharing`). Client symbols
+      (`notification_post`, `notification_update`, `notification_get_time_from_text`)
+      remain exported by `libnotification.so`.
 
 ### Summary of net effect
 
